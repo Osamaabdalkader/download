@@ -934,68 +934,295 @@ footer {
 }
 
 @media (max-width: 480px) {
-    .user-info-card {
-        flex-direction: column;
-        text-align: center;
+    .container {
+        padding: 120px 8px 100px;
     }
-    
-    .user-contact-info {
-        flex-direction: column;
-    }
-    
-    .contact-item {
-        width: 100%;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-    
+
+    /* أزرار التنقل - أصغر حجماً وبجانب بعض */
     .nav-links {
-        flex-direction: column;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        gap: 6px;
+        margin-bottom: 15px;
     }
-    
+
     .nav-link {
-        width: 100%;
+        padding: 8px 12px;
+        font-size: 0.75rem;
+        min-width: auto;
+        flex: 1;
+        min-width: 80px;
     }
-    
-    .referral-input-group {
-        flex-direction: column;
+
+    .nav-link i {
+        font-size: 0.9rem;
+        margin-left: 4px;
     }
-    
-    .header-controls {
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
+
+    /* معلومات المستخدم - أصغر حجماً وبجانب بعض */
+    .user-info-card {
+        padding: 15px;
+        gap: 12px;
+        margin-bottom: 15px;
     }
-    
-    .search-box input {
-        width: 100%;
+
+    .user-avatar-container img {
+        width: 60px;
+        height: 60px;
+        border-width: 2px;
     }
-    
-    /* إظهار النص تحت الأيقونات في الشريط السفلي للشاشات الصغيرة */
-    .footer-icons .icon span {
-        display: block;
-        font-size: 0.7rem;
-        margin-top: 2px;
+
+    .user-details h2 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
     }
-    
-    .footer-icons .icon i {
-        margin-bottom: 0;
-        font-size: 1.4rem;
+
+    .user-contact-info {
+        gap: 8px;
     }
-    
-    .footer-icons .highlight {
+
+    .contact-item {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .contact-item i {
+        font-size: 0.8rem;
+    }
+
+    /* مرتبتك الحالية - أصغر حجماً */
+    .rank-card {
+        margin-bottom: 15px;
+    }
+
+    .card-header {
+        padding: 12px 15px;
+    }
+
+    .card-header h2 {
+        font-size: 1rem;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .rank-icon {
         width: 50px;
         height: 50px;
-        margin-top: -20px;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
     }
-    
-    .footer-icons .highlight i {
+
+    .rank-title {
+        font-size: 1.1rem;
+    }
+
+    .rank-level {
+        font-size: 0.85rem;
+    }
+
+    .rank-progress {
+        padding: 10px;
+    }
+
+    .rank-progress h4 {
+        font-size: 0.95rem;
+    }
+
+    .rank-progress p {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+
+    /* الإحصائيات - كل اثنين بجانب بعض */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .stat-card {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .stat-info h3 {
         font-size: 1.4rem;
     }
-    
-    .footer-icons .highlight span {
-        display: none;
+
+    .stat-info p {
+        font-size: 0.8rem;
     }
-        }
+
+    .stat-trend {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+
+    /* رابط التسريع - أصغر حجماً */
+    .card {
+        margin-bottom: 15px;
+    }
+
+    .card-description {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+    }
+
+    .referral-input-group {
+        margin-bottom: 15px;
+    }
+
+    .referral-input-group input {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+
+    .referral-code-group {
+        margin-bottom: 15px;
+    }
+
+    .referral-code-group label {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+    }
+
+    .code-display {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+
+    .social-share p {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+
+    .share-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    /* أحدث الأعضاء - أصغر حجماً */
+    .header-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 8px 12px 8px 30px;
+        font-size: 0.85rem;
+    }
+
+    .search-box i {
+        left: 10px;
+        font-size: 0.9rem;
+    }
+
+    .page-filter {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+
+    .data-table th {
+        font-size: 0.8rem;
+    }
+
+    .user-badge {
+        padding: 3px 8px;
+        font-size: 0.7rem;
+    }
+
+    .table-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .table-info {
+        font-size: 0.8rem;
+    }
+
+    .pagination-btn,
+    .pagination-page {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .loading-row {
+        padding: 20px;
+        font-size: 0.85rem;
+    }
+}
+
+/* تحسينات إضافية للشاشات الصغيرة جداً */
+@media (max-width: 360px) {
+    .nav-link {
+        padding: 6px 8px;
+        font-size: 0.7rem;
+        min-width: 70px;
+    }
+
+    .nav-link i {
+        font-size: 0.8rem;
+        margin-left: 3px;
+    }
+
+    .user-info-card {
+        padding: 12px;
+    }
+
+    .user-avatar-container img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .user-details h2 {
+        font-size: 1rem;
+    }
+
+    .contact-item {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+    }
+
+    .stats-grid {
+        gap: 8px;
+    }
+
+    .stat-card {
+        padding: 10px;
+    }
+
+    .stat-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+
+    .stat-info h3 {
+        font-size: 1.2rem;
+    }
+    }
