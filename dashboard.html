@@ -33,19 +33,11 @@
     </header>
 
     <div class="container dashboard-container">
-        <!-- العنوان الرئيسي -->
-        <div class="page-header">
-            <h1>لوحة التحكم</h1>
-        </div>
-
-        <!-- معلومات المستخدم -->
-        <div class="user-info-card">
-            <div class="user-avatar-container">
-                <img id="user-avatar" src="https://ui-avatars.com/api/?name=مستخدم&background=random" alt="صورة المستخدم">
-                <div class="user-details">
-                    <h2 id="username">مستخدم</h2>
-                    <span class="user-rank" id="user-rank-display">مرتبة: مبتدئ</span>
-                </div>
+        <!-- بطاقة الترحيب -->
+        <div class="welcome-card">
+            <div class="welcome-content">
+                <h1>مرحباً بك في منصة تسريع، <span id="banner-username">مستخدم</span>!</h1>
+                <p>منصة التسويق الإلكتروني المتكاملة لتسريع نمو أعمالك</p>
             </div>
             <div class="user-contact-info">
                 <div class="contact-item">
@@ -63,31 +55,19 @@
             </div>
         </div>
 
-        <!-- شبكة التنقل -->
-        <nav class="dashboard-nav">
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">
-                    <i class="fas fa-home"></i>
-                    <span>الرئيسية</span>
-                </a>
-                <a href="dashboard.html" class="nav-link active">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>لوحة التحكم</span>
-                </a>
-                <a href="network.html" class="nav-link">
-                    <i class="fas fa-sitemap"></i>
-                    <span>شبكتي</span>
-                </a>
-                <a href="management.html" class="nav-link">
-                    <i class="fas fa-users-cog"></i>
-                    <span>الإدارة</span>
-                </a>
-                <a href="admin.html" class="nav-link admin-only">
-                    <i class="fas fa-user-shield"></i>
-                    <span>لوحة المشرفين</span>
-                </a>
+        <!-- مرتبتك الحالية -->
+        <div class="card rank-card">
+            <div class="card-header">
+                <h2><i class="fas fa-trophy"></i> مرتبتك الحالية</h2>
             </div>
-        </nav>
+            <div class="card-body">
+                <div id="rank-info">
+                    <div class="loading-content">
+                        <i class="fas fa-spinner fa-spin"></i> جاري تحميل معلومات المرتبة...
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- إحصائيات -->
         <div class="stats-grid">
@@ -136,9 +116,36 @@
             </div>
         </div>
 
+        <!-- شبكة التنقل -->
+        <nav class="dashboard-nav">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>الرئيسية</span>
+                </a>
+                <a href="dashboard.html" class="nav-link active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>لوحة التحكم</span>
+                </a>
+                <a href="network.html" class="nav-link">
+                    <i class="fas fa-sitemap"></i>
+                    <span>شبكتي</span>
+                </a>
+                <a href="management.html" class="nav-link">
+                    <i class="fas fa-users-cog"></i>
+                    <span>الإدارة</span>
+                </a>
+                <a href="admin.html" class="nav-link admin-only">
+                    <i class="fas fa-user-shield"></i>
+                    <span>لوحة المشرفين</span>
+                </a>
+            </div>
+        </nav>
+
         <!-- محتوى لوحة التحكم -->
         <div class="dashboard-content">
             <div class="content-col main-col">
+                <!-- رابط التسريع -->
                 <div class="card">
                     <div class="card-header">
                         <h2><i class="fas fa-link"></i> رابط التسريع الخاص بك</h2>
@@ -183,6 +190,7 @@
                     </div>
                 </div>
 
+                <!-- أحدث الأعضاء -->
                 <div class="card">
                     <div class="card-header">
                         <h2><i class="fas fa-list"></i> أحدث الأعضاء</h2>
@@ -237,19 +245,18 @@
             </div>
 
             <div class="content-col side-col">
-                <div class="card rank-card">
-                    <div class="card-header">
-                        <h2><i class="fas fa-trophy"></i> مرتبتك الحالية</h2>
-                    </div>
-                    <div class="card-body">
-                        <div id="rank-info">
-                            <div class="loading-content">
-                                <i class="fas fa-spinner fa-spin"></i> جاري تحميل معلومات المرتبة...
-                            </div>
+                <!-- معلومات المستخدم -->
+                <div class="user-info-card">
+                    <div class="user-avatar-container">
+                        <img id="user-avatar" src="https://ui-avatars.com/api/?name=مستخدم&background=random" alt="صورة المستخدم">
+                        <div class="user-details">
+                            <h2 id="username">مستخدم</h2>
+                            <span class="user-rank" id="user-rank-display">مرتبة: مبتدئ</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- توزيع النقاط -->
                 <div class="card">
                     <div class="card-header">
                         <h2><i class="fas fa-chart-line"></i> توزيع النقاط</h2>
@@ -330,4 +337,4 @@
     <script type="module" src="auth.js"></script>
     <script type="module" src="dashboard.js"></script>
 </body>
-                                                          </html>
+    </html>
