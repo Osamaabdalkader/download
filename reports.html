@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقارير وأداء الشبكة - منصة تسريع</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="reports.css">
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- شريط الرأس (مطابق للصفحة الرئيسية) -->
+    <header>
+        <div class="gold-bar"></div>
+        <div class="header-top">
+            <a href="index.html" class="home-icon">
+                <i class="fas fa-home"></i>
+            </a>
+            <div class="logo-container">
+                <img src="tasreea.png" alt="منصة تسريع الإلكترونية" class="logo-image">
+                <h1>منصة تسريع الإلكترونية</h1>
+            </div>
+            <div class="header-top-icons">
+                <div class="icon" id="notifications-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="icon" id="profile-header-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container reports-container">
+        <!-- أزرار التنقل -->
+        <nav class="dashboard-nav">
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>لوحة التحكم</span>
+                </a>
+                <a href="network.html" class="nav-link">
+                    <i class="fas fa-sitemap"></i>
+                    <span>شبكتي</span>
+                </a>
+                <a href="management.html" class="nav-link">
+                    <i class="fas fa-users-cog"></i>
+                    <span>إدارة المجموعة</span>
+                </a>
+                <a href="reports.html" class="nav-link active">
+                    <i class="fas fa-chart-line"></i>
+                    <span>التقارير</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- عنوان الصفحة -->
+        <div class="page-header">
+            <h1>التقارير والإحصائيات</h1>
+            <p>تقارير تحليلية عن أداء شبكة الإحالات الخاصة بك</p>
+        </div>
+
+        <!-- معلومات المستخدم -->
+        <div class="user-info-card">
+            <div class="user-avatar-container">
+                <img id="user-avatar" src="https://ui-avatars.com/api/?name=مستخدم&background=random" alt="صورة المستخدم">
+            </div>
+            <div class="user-details">
+                <h2 id="username">مستخدم</h2>
+                <span class="user-rank" id="user-rank-display">مرتبة: مبتدئ</span>
+                <span id="admin-badge" class="admin-badge" style="display: none;">مشرف</span>
+            </div>
+        </div>
+
+        <!-- الفلاتر -->
+        <div class="filters-card">
+            <div class="card-header">
+                <h2><i class="fas fa-filter"></i> تصفية البيانات</h2>
+            </div>
+            <div class="card-body">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="time-filter">الفترة الزمنية:</label>
+                        <select id="time-filter" class="filter-select">
+                            <option value="7">آخر 7 أيام</option>
+                            <option value="30" selected>آخر 30 يومًا</option>
+                            <option value="90">آخر 90 يومًا</option>
+                            <option value="180">آخر 6 أشهر</option>
+                            <option value="365">آخر سنة</option>
+                            <option value="custom">مخصص</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group" id="custom-date-range" style="display: none;">
+                        <label for="start-date">من:</label>
+                        <input type="date" id="start-date" class="filter-input">
+                        
+                        <label for="end-date">إلى:</label>
+                        <input type="date" id="end-date" class="filter-input">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="level-filter">المستوى:</label>
+                        <select id="level-filter" class="filter-select">
+                            <option value="all">جميع المستويات</option>
+                            <option value="1">المستوى 1</option>
+                            <option value="2">المستوى 2</option>
+                            <option value="3">المستوى 3</option>
+                            <option value="4">المستوى 4+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="rank-filter">المرتبة:</label>
+                        <select id="rank-filter" class="filter-select">
+                            <option value="all">جميع المراتب</option>
+                            <option value="0">مرتبة 0</option>
+                            <option value="1">مرتبة 1</option>
+                            <option value="2">مرتبة 2</option>
+                            <option value="3">مرتبة 3</option>
+                            <option value="4">مرتبة 4</option>
+                            <option value="5">مرتبة 5+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="activity-filter">النشاط:</label>
+                        <select id="activity-filter" class="filter-select">
+                            <option value="all">جميع الأعضاء</option>
+                            <option value="active">نشط فقط</option>
+                            <option value="inactive">غير نشط</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button id="apply-filters" class="btn primary">
+                            <i class="fas fa-filter"></i> تطبيق الفلتر
+                        </button>
+                        <button id="reset-filters" class="btn secondary">
+                            <i class="fas fa-redo"></i> إعادة تعيين
+                        </button>
+                        <button id="save-filters" class="btn secondary">
+                            <i class="fas fa-save"></i> حفظ التفضيلات
+                        </button>
+                        <button id="export-report" class="btn primary">
+                            <i class="fas fa-download"></i> تصدير التقرير
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- إحصائيات -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-members">0</h3>
+                    <p>إجمالي الأعضاء</p>
+                </div>
+                <div class="stat-trend up">+5%</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="new-members">0</h3>
+                    <p>أعضاء جدد</p>
+                </div>
+                <div class="stat-trend up">+3%</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="network-depth">0</h3>
+                    <p>أعمق مستوى</p>
+                </div>
+                <div class="stat-trend up">+2%</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="growth-rate">0%</h3>
+                    <p>معدل النمو</p>
+                </div>
+                <div class="stat-trend up">+12%</div>
+            </div>
+        </div>
+
+        <!-- المخططات البيانية -->
+        <div class="charts-grid">
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-chart-bar"></i> نمو الشبكة خلال الفترة</h2>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="growth-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-chart-pie"></i> توزيع المستويات</h2>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="levels-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-user-clock"></i> نشاط الأعضاء</h2>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="activity-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-trophy"></i> الترقيات خلال الفترة</h2>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="ranks-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الجداول -->
+        <div class="tables-grid">
+            <div class="card table-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-table"></i> أعلى الأعضاء أداءً</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>الاسم</th>
+                                    <th>البريد الإلكتروني</th>
+                                    <th>المستوى</th>
+                                    <th>عدد الإحالات</th>
+                                    <th>النقاط</th>
+                                </tr>
+                            </thead>
+                            <tbody id="top-performers">
+                                <tr>
+                                    <td colspan="5" class="loading-text">جاري تحميل البيانات...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card table-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-history"></i> آخر الإحالات</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>الاسم</th>
+                                    <th>البريد الإلكتروني</th>
+                                    <th>المستوى</th>
+                                    <th>تاريخ الانضمام</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-referrals">
+                                <tr>
+                                    <td colspan="5" class="loading-text">جاري تحميل البيانات...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- شريط التذييل (مطابق للصفحة الرئيسية) -->
+    <footer>
+        <div class="footer-icons">
+            <a class="icon" id="groups-icon">
+                <i class="fas fa-users"></i>
+                <span>مجموعتك</span>
+            </a>
+            <a class="icon" id="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>السلة</span>
+            </a>
+            <a href="add-post.html" class="icon highlight" id="add-button">
+                <i class="fas fa-plus"></i>
+                <span>إضافة</span>
+            </a>
+            <a class="icon" id="support-icon">
+                <i class="fas fa-headset"></i>
+                <span>الدعم</span>
+            </a>
+            <a class="icon" id="more-icon">
+                <i class="fas fa-cog"></i>
+                <span>المزيد</span>
+            </a>
+        </div>
+    </footer>
+
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script src="reports.js"></script>
+</body>
+                    </html>
