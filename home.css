@@ -1,4 +1,4 @@
- /* home.css - الإصدار المحسن */
+/* home.css - الإصدار المحسن */
 
 /* أنماط عامة */
 * {
@@ -54,6 +54,9 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .logo-image {
@@ -79,6 +82,7 @@ header {
     gap: 15px;
 }
 
+.header-top .icon,
 .header-top-icons .icon {
     position: relative;
     width: 36px;
@@ -94,6 +98,7 @@ header {
     border: 1px solid rgba(76, 201, 240, 0.3);
 }
 
+.header-top .icon:hover,
 .header-top-icons .icon:hover {
     background: rgba(76, 201, 240, 0.2);
     transform: translateY(-2px);
@@ -460,8 +465,16 @@ footer {
     
     .logo-container h1 {
         font-size: 1rem;
+        display: none; /* إخفاء النص في الشاشات الصغيرة */
     }
     
+    .logo-container {
+        position: static;
+        transform: none;
+        margin: 0 auto;
+    }
+    
+    .header-top .icon,
     .header-top-icons .icon {
         width: 32px;
         height: 32px;
@@ -573,4 +586,4 @@ footer {
     .footer-icons .highlight span {
         display: none; /* التأكد من إخفاء النص تحت زر الإضافة */
     }
-    }
+ }
