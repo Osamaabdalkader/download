@@ -35,11 +35,9 @@ class NetworkManager {
       if (userData) {
         const usernameEl = document.getElementById('username');
         const userAvatar = document.getElementById('user-avatar');
-        const bannerUsername = document.getElementById('banner-username');
         const userRankDisplay = document.getElementById('user-rank-display');
         
         if (usernameEl) usernameEl.textContent = userData.name;
-        if (bannerUsername) bannerUsername.textContent = userData.name;
         if (userAvatar) userAvatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name)}&background=random`;
         
         // تحديث عرض المرتبة
@@ -278,13 +276,72 @@ class NetworkManager {
       });
     }
     
-    // تسجيل الخروج
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', () => {
-        authManager.handleLogout();
-      });
-    }
+    // إعداد مستمعي الأحداث للأيقونات
+    this.setupIconEventListeners();
+  }
+
+  setupIconEventListeners() {
+    // أيقونة مجموعتك
+    document.getElementById('groups-icon').addEventListener('click', function(e) {
+      e.preventDefault();
+      handleIconClick('groups-icon');
+    });
+    
+    // أيقونة السلة
+    document.getElementById('cart-icon').addEventListener('click', function(e) {
+      e.preventDefault();
+      handleIconClick('cart-icon');
+    });
+    
+    // أيقونة الدعم
+    document.getElementById('support-icon').addEventListener('click', function(e) {
+      e.preventDefault();
+      handleIconClick('support-icon');
+    });
+    
+    // أيقونة المزيد
+    document.getElementById('more-icon').addEventListener('click', function(e) {
+      e.preventDefault();
+      handleIconClick('more-icon');
+    });
+    
+    // أيقونة الإشعارات
+    document.getElementById('notifications-icon').addEventListener('click', function(e) {
+      e.preventDefault();
+      handleIconClick('notifications-icon');
+    });
+    
+    // أيقونة القائمة الجانبية
+    document.getElementById('sidebar-toggle').addEventListener('click', function(e) {
+      e.preventDefault();
+      handleIconClick('sidebar-toggle');
+    });
+  }
+
+  // معالج النقر على الأيقونات
+  handleIconClick(iconId) {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // إذا كان المستخدم مسجلاً
+        switch(iconId) {
+          case 'groups-icon':
+            window.location.href = 'dashboard.html';
+            break;
+          case 'support-icon':
+            window.location.href = 'messages.html';
+            break;
+          case 'cart-icon':
+          case 'more-icon':
+          case 'notifications-icon':
+          case 'sidebar-toggle':
+            alert('هذه الميزة قيد التطوير حالياً');
+            break;
+        }
+      } else {
+        // إذا لم يكن المستخدم مسجلاً
+        window.location.href = 'login.html';
+      }
+    });
   }
 
   filterNetwork(searchTerm) {
