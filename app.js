@@ -49,7 +49,7 @@ function setupEventListeners() {
         profileHeaderIcon.addEventListener('click', () => {
             const user = auth.currentUser;
             if (user) {
-                window.location.href = 'dashboard.html';
+                window.location.href = 'profile.html';
             } else {
                 window.location.href = 'login.html';
             }
@@ -61,10 +61,8 @@ function setupEventListeners() {
         groupsIcon.addEventListener('click', () => {
             const user = auth.currentUser;
             if (user) {
-                // الانتقال إلى groups .html للمستخدم المسجل
-                window.location.href = 'groups.html';
+                window.location.href = 'dashboard.html';
             } else {
-                alert('يجب تسجيل الدخول أولاً للوصول إلى الرسائل');
                 window.location.href = 'login.html';
             }
         });
@@ -75,10 +73,8 @@ function setupEventListeners() {
         cartIcon.addEventListener('click', () => {
             const user = auth.currentUser;
             if (user) {
-                // الانتقال .carthtml للمستخدم المسجل
-                window.location.href = 'cart.html';
+                alert('صفحة السلة قيد التطوير');
             } else {
-                alert('يجب تسجيل الدخول أولاً للوصول إلى الرسائل');
                 window.location.href = 'login.html';
             }
         });
@@ -89,7 +85,6 @@ function setupEventListeners() {
         supportIcon.addEventListener('click', () => {
             const user = auth.currentUser;
             if (user) {
-                // الانتقال إلى messages.html للمستخدم المسجل
                 window.location.href = 'messages.html';
             } else {
                 alert('يجب تسجيل الدخول أولاً للوصول إلى الرسائل');
@@ -98,18 +93,13 @@ function setupEventListeners() {
         });
     }
     
-    // أيقونة المزيد (
+    // أيقونة المزيد
     if (moreIcon) {
         moreIcon.addEventListener('click', () => {
             const user = auth.currentUser;
-            if (user && currentUserData && currentUserData.isAdmin) {
-                // الانتقال إلى orders.html للمشرفين
-                window.location.href = 'orders.html';
-            } else if (user) {
-                // الانتقال إلى more.html للمستخدمين العاديين
-                window.location.href = 'more.html'; 
+            if (user) {
+                alert('صفحة المزيد قيد التطوير');
             } else {
-                alert('يجب تسجيل الدخول أولاً');
                 window.location.href = 'login.html';
             }
         });
@@ -153,7 +143,7 @@ function checkAuthState() {
                 }
             });
         } else {
-            // المستخدم غير ممسجل
+            // المستخدم غير مسجل
             updateUIForLoggedOutUser();
         }
     });
@@ -430,4 +420,4 @@ function showLoading() {
 
 function hideLoading() {
     if (loadingOverlay) loadingOverlay.classList.add('hidden');
-      }
+}
