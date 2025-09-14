@@ -133,6 +133,7 @@ header {
     font-size: 1.1rem;
     transition: all 0.3s ease;
     border: 1px solid rgba(76, 201, 240, 0.3);
+    cursor: pointer;
 }
 
 .header-top-icons .icon:hover {
@@ -347,14 +348,13 @@ header {
 }
 
 .filters-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15px;
     align-items: end;
 }
 
 .filter-group {
-    flex: 1;
     min-width: 150px;
 }
 
@@ -386,6 +386,9 @@ header {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    grid-column: 1 / -1;
+    justify-content: center;
+    margin-top: 15px;
 }
 
 .btn {
@@ -532,6 +535,7 @@ footer {
     transition: all 0.3s ease;
     flex: 1;
     padding: 5px 0;
+    cursor: pointer;
 }
 
 .footer-icons .icon i {
@@ -647,6 +651,14 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
     
+    .filters-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .filter-actions {
+        flex-direction: column;
+    }
+    
     .footer-icons .icon {
         font-size: 0.75rem;
     }
@@ -662,19 +674,6 @@ footer {
     
     .footer-icons .highlight i {
         font-size: 1.5rem;
-    }
-    
-    .filters-container {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .filter-group {
-        min-width: auto;
-    }
-    
-    .filter-actions {
-        justify-content: center;
     }
 }
 
@@ -754,6 +753,10 @@ footer {
     .stat-trend {
         font-size: 0.7rem;
         padding: 3px 8px;
+    }
+    
+    .filters-container {
+        grid-template-columns: 1fr;
     }
     
     .filter-actions {
