@@ -1,7 +1,7 @@
 // add-post.js - الإصدار المحدث مع إضافة النوع والموقع
 import { 
   auth, database, storage, serverTimestamp,
-  ref, push, onValue, storageRef, uploadBytesResumable, getDownloadURL, set
+  ref, push, onValue, storageRef, uploadBytesResumable, getDownloadURL
 } from './firebase.js';
 
 // عناصر DOM
@@ -25,82 +25,7 @@ let selectedFile = null;
 document.addEventListener('DOMContentLoaded', () => {
     console.log('صفحة إضافة منشور تم تحميلها');
     setupEventListeners();
-    setupIconEventListeners();
 });
-
-// إعداد مستمعي الأحداث للأيقونات (مطابق لصفحة التقارير)
-function setupIconEventListeners() {
-    // أيقونة مجموعتك
-    document.getElementById('groups-icon').addEventListener('click', function(e) {
-        e.preventDefault();
-        handleIconClick('groups-icon');
-    });
-    
-    // أيقونة السلة
-    document.getElementById('cart-icon').addEventListener('click', function(e) {
-        e.preventDefault();
-        handleIconClick('cart-icon');
-    });
-    
-    // أيقونة الدعم
-    document.getElementById('support-icon').addEventListener('click', function(e) {
-        e.preventDefault();
-        handleIconClick('support-icon');
-    });
-    
-    // أيقونة المزيد
-    document.getElementById('more-icon').addEventListener('click', function(e) {
-        e.preventDefault();
-        handleIconClick('more-icon');
-    });
-    
-    // أيقونة الإشعارات
-    document.getElementById('notifications-icon').addEventListener('click', function(e) {
-        e.preventDefault();
-        handleIconClick('notifications-icon');
-    });
-    
-    // أيقونة القائمة الجانبية
-    document.getElementById('sidebar-toggle').addEventListener('click', function(e) {
-        e.preventDefault();
-        handleIconClick('sidebar-toggle');
-    });
-    
-    // أيقونة الصفحة الرئيسية
-    document.getElementById('profile-header-icon').addEventListener('click', function(e) {
-        e.preventDefault();
-        handleIconClick('profile-header-icon');
-    });
-}
-
-// معالج النقر على الأيقونات (مطابق لصفحة التقارير)
-function handleIconClick(iconId) {
-    const user = auth.currentUser;
-    
-    if (user) {
-        // إذا كان المستخدم مسجلاً
-        switch(iconId) {
-            case 'groups-icon':
-                window.location.href = 'dashboard.html';
-                break;
-            case 'support-icon':
-                window.location.href = 'messages.html';
-                break;
-            case 'profile-header-icon':
-                window.location.href = 'profile.html';
-                break;
-            case 'cart-icon':
-            case 'more-icon':
-            case 'notifications-icon':
-            case 'sidebar-toggle':
-                alert('هذه الميزة قيد التطوير حالياً');
-                break;
-        }
-    } else {
-        // إذا لم يكن المستخدم مسجلاً
-        window.location.href = 'login.html';
-    }
-}
 
 // إعداد مستمعي الأحداث
 function setupEventListeners() {
@@ -246,21 +171,12 @@ async function handlePublishPost(e) {
         
         // حفظ المنشور في قاعدة البيانات
         console.log('جاري حفظ المنشور في قاعدة البيانات...');
-        const newPostRef = push(ref(database, 'posts'));
-        await set(newPostRef, postData);
+        await push(ref(database, 'posts'), postData);
         
-        // الحصول على معرف المنشور وإضافته إلى بيانات المنشور
-        const postId = newPostRef.key;
-        postData.id = postId;
-        
-        console.log('تم نشر المنشور بنجاح في قاعدة البيانات، معرف المنشور:', postId);
+        console.log('تم نشر المنشور بنجاح في قاعدة البيانات');
         alert('تم نشر المنشور بنجاح!');
-        
-        // حفظ بيانات المنشور في localStorage للاستخدام في صفحة التفاصيل
-        localStorage.setItem('currentPost', JSON.stringify(postData));
-        
-        // الانتقال إلى صفحة تفاصيل المنشور
-        window.location.href = 'post-detail.html';
+        resetAddPostForm();
+        window.location.href = 'index.html';
         
     } catch (error) {
         console.error('خطأ تفصيلي أثناء نشر المنشور:', error);
@@ -364,4 +280,4 @@ function hideLoading() {
         loadingOverlay.classList.add('hidden');
         uploadProgress.style.width = '0%';
     }
-    }
+          }
