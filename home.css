@@ -16,7 +16,7 @@ body {
 }
 
 .container {
-    padding: 160px 15px 120px;
+    padding: 180px 15px 80px; /* تقليل المسافة بعد آخر منشور */
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -46,21 +46,22 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 15px;
+    padding: 15px 20px; /* زيادة التباعد */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 80px; /* زيادة ارتفاع الصف الأول */
 }
 
 .header-top .icon {
     position: relative;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     color: #90e0ef;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     transition: all 0.3s ease;
     border: 1px solid rgba(76, 201, 240, 0.3);
 }
@@ -73,15 +74,16 @@ header {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     position: absolute;
-    left: 60%;
+    left: 50%;
     transform: translateX(-50%);
+    white-space: nowrap; /* منع العنوان من الالتفاف إلى سطرين */
 }
 
 .logo-image {
-    width: 55px;
-    height: 55px;
+    width: 50px; /* زيادة حجم الشعار */
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #4cc9f0;
@@ -89,7 +91,7 @@ header {
 }
 
 .logo-container h1 {
-    font-size: 1.3rem;
+    font-size: 1.4rem; /* زيادة حجم النص */
     font-weight: 700;
     background: linear-gradient(to right, #4cc9f0, #90e0ef);
     -webkit-background-clip: text;
@@ -119,10 +121,10 @@ header {
 }
 
 .header-bottom {
-    padding: 12px 15px;
+    padding: 15px 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
 }
 
 .search-container {
@@ -134,12 +136,12 @@ header {
 
 .search-input {
     flex: 1;
-    padding: 10px 15px;
+    padding: 12px 18px;
     border: none;
     border-radius: 20px 0 0 20px;
     background: rgba(255, 255, 255, 0.15);
     color: white;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     border: 1px solid rgba(76, 201, 240, 0.3);
     border-right: none;
 }
@@ -154,7 +156,7 @@ header {
 }
 
 .search-btn {
-    padding: 10px 18px;
+    padding: 12px 20px;
     border: none;
     border-radius: 0 20px 20px 0;
     background: linear-gradient(90deg, #4cc9f0, #3a86ff);
@@ -170,7 +172,7 @@ header {
 .filters-row {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .filter-category, .filter-location {
@@ -178,13 +180,13 @@ header {
 }
 
 .filter-select {
-    padding: 8px 12px;
+    padding: 10px 15px;
     border-radius: 15px;
     border: 1px solid rgba(76, 201, 240, 0.3);
     background: rgba(0, 0, 0, 0.3);
     color: white;
-    font-size: 0.85rem;
-    min-width: 120px;
+    font-size: 0.9rem;
+    min-width: 130px;
 }
 
 .filter-select:focus {
@@ -318,7 +320,7 @@ header {
     font-size: 1.1rem;
 }
 
-/* تصميم الفوتر مع زيادة الارتفاع */
+/* تصميم الفوتر */
 footer {
     position: fixed;
     bottom: 0;
@@ -383,23 +385,13 @@ footer {
 }
 
 .footer-icons .highlight span {
-    display: none; /* إخفاء النص تحت زر الإضافة */
+    display: none;
 }
 
 .footer-icons .highlight:active {
     transform: scale(0.9);
     box-shadow: 0 2px 8px rgba(249, 215, 28, 0.6);
 }
-
-.gold-bar {
-    height: 4px;
-    background: linear-gradient(90deg, #d4af37, #f9d71c, #d4af37);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-} 
-
 
 /* تحميل المحتوى */
 .posts-loading {
@@ -445,7 +437,7 @@ footer {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 15px;
+        padding: 15px 20px;
         height: auto;
     }
     
@@ -462,32 +454,32 @@ footer {
     }
     
     .container {
-        padding-top: 140px;
+        padding-top: 160px;
     }
 }
 
 @media (max-width: 768px) {
     .container {
-        padding: 160px 10px 110px;
+        padding: 170px 10px 70px;
     }
     
     .logo-container h1 {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     
     .header-top .icon {
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
     }
     
     .search-input {
-        padding: 8px 12px;
-        font-size: 0.85rem;
+        padding: 10px 15px;
+        font-size: 0.9rem;
     }
     
     .search-btn {
-        padding: 8px 15px;
+        padding: 10px 16px;
     }
     
     .filters-row {
@@ -496,9 +488,9 @@ footer {
     }
     
     .filter-select {
-        min-width: 110px;
-        font-size: 0.8rem;
-        padding: 6px 10px;
+        min-width: 120px;
+        font-size: 0.85rem;
+        padding: 8px 12px;
     }
     
     .posts-grid {
@@ -538,34 +530,33 @@ footer {
     }
     
     .header-top {
-        padding: 10px;
+        padding: 12px 15px;
     }
     
     .logo-image {
-        width: 35px;
-        height: 35px;
+        width: 45px;
+        height: 45px;
     }
     
     .logo-container h1 {
-        font-size: 0.9rem;
+        font-size: 1.1rem;
     }
     
     .header-bottom {
-        padding: 10px;
+        padding: 12px 15px;
     }
     
     .filters-row {
         flex-direction: row;
-        gap: 8px;
+        gap: 10px;
         justify-content: flex-end;
     }
     
     .filter-select {
         width: auto;
-        min-width: 100px;
+        min-width: 110px;
     }
     
-    /* إظهار النص تحت الأيقونات في الشريط السفلي للشاشات الصغيرة */
     .footer-icons .icon span {
         display: block;
         font-size: 0.7rem;
@@ -588,6 +579,25 @@ footer {
     }
     
     .footer-icons .highlight span {
-        display: none; /* التأكد من إخفاء النص تحت زر الإضافة */
+        display: none;
     }
-        }
+    
+    /* تعديلات إضافية للهيدر على الشاشات الصغيرة */
+    .header-top {
+        min-height: 70px;
+    }
+    
+    .logo-container {
+        gap: 10px;
+    }
+    
+    .header-top .icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+    }
+    
+    .header-top-icons {
+        gap: 12px;
+    }
+                                  }
