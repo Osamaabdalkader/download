@@ -1,4 +1,4 @@
-// post-detail.js - الإصدار المعدل وفق الكود الأصلي
+// post-detail.js - الإصدار المعدل وفق الكود الأصلي مع تحسينات التكامل
 import { 
   auth, database, serverTimestamp,
   ref, push, onValue
@@ -8,6 +8,8 @@ import {
 const postDetailContent = document.getElementById('post-detail-content');
 const buyNowBtn = document.getElementById('buy-now-btn');
 const adminIcon = document.getElementById('admin-icon');
+const profileHeaderIcon = document.getElementById('profile-header-icon');
+const notificationsIcon = document.getElementById('notifications-icon');
 
 // متغيرات النظام
 let currentPost = null;
@@ -20,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPost = postData;
         showPostDetail(postData);
         loadAdminUsers();
+        setupEventListeners();
     } else {
         postDetailContent.innerHTML = '<p class="error">لم يتم العثور على المنشور</p>';
         setTimeout(() => {
@@ -27,6 +30,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 });
+
+// إعداد مستمعي الأحداث
+function setupEventListeners() {
+    // أيقونة الإشعارات
+    if (notificationsIcon) {
+        notificationsIcon.addEventListener('click', () => {
+            alert('صفحة الإشعارات قيد التطوير');
+        });
+    }
+
+    // أيقونة الملف الشخصي في الهيدر
+    if (profileHeaderIcon) {
+        profileHeaderIcon.addEventListener('click', () => {
+            const user = auth.currentUser;
+            if (user) {
+                window.location.href = 'dashboard.html';
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    }
+}
 
 // تحميل المشرفين
 function loadAdminUsers() {
@@ -41,7 +66,20 @@ function loadAdminUsers() {
                 }
             }
         }
+        
+        // التحقق من صلاحيات المشرف للمستخدم الحالي
+        checkCurrentUserAdminStatus();
     });
+}
+
+// التحقق من صلاحيات المشرف للمستخدم الحالي
+function checkCurrentUserAdminStatus() {
+    const user = auth.currentUser;
+    if (user) {
+        if (adminUsers.includes(user.uid)) {
+            adminIcon.style.display = 'flex';
+        }
+    }
 }
 
 // عرض تفاصيل المنشور
@@ -52,8 +90,8 @@ function showPostDetail(post) {
     postDetailContent.innerHTML = `
         ${post.imageUrl ? 
             `<img src="${post.imageUrl}" alt="${post.title}" class="post-detail-image">` : 
-            `<div class="post-detail-image" style="display: flex; align-items: center; justify-content: center; background: var(--light-gray);">
-                <i class="fas fa-image fa-3x" style="color: var(--gray-color);"></i>
+            `<div class="post-detail-image" style="display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.1);">
+                <i class="fas fa-image fa-3x" style="color: rgba(255, 255, 255, 0.3);"></i>
             </div>`
         }
         
@@ -134,3 +172,21 @@ async function createOrder(userId, post) {
         alert('حدث خطأ أثناء إرسال الطلب: ' + error.message);
     }
 }
+
+// التحقق من حالة المصادقة
+auth.onAuthStateChanged(user => {
+    if (user) {
+        // تحميل بيانات المستخدم الحالي
+        const userRef = ref(database, 'users/' + user.uid);
+        onValue(userRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                
+                // التحقق من صلاحيات المشرف
+                if (userData.isAdmin) {
+                    adminIcon.style.display = 'flex';
+                }
+            }
+        });
+    }
+});
