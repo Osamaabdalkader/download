@@ -25,6 +25,7 @@ class ManagementManager {
         this.currentUser = user;
         await this.loadUserData(user.uid);
         this.setupEventListeners();
+        this.setupIconEventListeners();
         this.loadManagementData();
       } else {
         window.location.href = 'index.html';
@@ -42,17 +43,15 @@ class ManagementManager {
       if (userData) {
         const usernameEl = document.getElementById('username');
         const userAvatar = document.getElementById('user-avatar');
-        const bannerUsername = document.getElementById('banner-username');
         const userRankDisplay = document.getElementById('user-rank-display');
         
         if (usernameEl) usernameEl.textContent = userData.name;
-        if (bannerUsername) bannerUsername.textContent = userData.name;
         if (userAvatar) userAvatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name)}&background=random`;
         
         // تحديث عرض المرتبة
         const rankTitles = [
           "مبتدئ", "عضو", "عضو متميز", "عضو نشيط", "عضو فعال",
-          "عضو برونزي", "عضو فضي", "عضو ذهبي", "عضو بلاتيني", "عضو ماسي", "قائد"
+          "عضو برونزي", "عضو فضي", "عضو ذهبي", "عضو بلاتيني", "عúde ماسي", "قائد"
         ];
         const currentRank = userData.rank || 0;
         if (userRankDisplay) userRankDisplay.textContent = `مرتبة: ${rankTitles[currentRank]}`;
@@ -75,6 +74,68 @@ class ManagementManager {
     const navBrandIcon = document.querySelector('.nav-brand i');
     if (navBrandIcon) {
       navBrandIcon.style.color = `var(--primary)`;
+    }
+  }
+
+  setupIconEventListeners() {
+    // أيقونة مجموعتك
+    document.getElementById('groups-icon').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.handleIconClick('groups-icon');
+    });
+    
+    // أيقونة السلة
+    document.getElementById('cart-icon').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.handleIconClick('cart-icon');
+    });
+    
+    // أيقونة الدعم
+    document.getElementById('support-icon').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.handleIconClick('support-icon');
+    });
+    
+    // أيقونة المزيد
+    document.getElementById('more-icon').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.handleIconClick('more-icon');
+    });
+    
+    // أيقونة الإشعارات
+    document.getElementById('notifications-icon').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.handleIconClick('notifications-icon');
+    });
+    
+    // أيقونة القائمة الجانبية
+    document.getElementById('sidebar-toggle').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.handleIconClick('sidebar-toggle');
+    });
+  }
+
+  handleIconClick(iconId) {
+    if (!this.currentUser) {
+      // إذا لم يكن المستخدم مسجلاً
+      window.location.href = 'login.html';
+      return;
+    }
+
+    // إذا كان المستخدم مسجلاً
+    switch(iconId) {
+      case 'groups-icon':
+        window.location.href = 'dashboard.html';
+        break;
+      case 'support-icon':
+        window.location.href = 'messages.html';
+        break;
+      case 'cart-icon':
+      case 'more-icon':
+      case 'notifications-icon':
+      case 'sidebar-toggle':
+        alert('هذه الميزة قيد التطوير حالياً');
+        break;
     }
   }
 
