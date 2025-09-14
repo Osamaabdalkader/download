@@ -1,11 +1,19 @@
-// reports.js - الإصدار المعدل للتوافق مع firebase.js
-import { 
-  auth, database, 
-  onAuthStateChanged, 
-  ref, onValue, get, 
-  checkAdminStatus, 
-  getAllNetworkMembers // سأضيف هذه الدالة إلى firebase.js
-} from './firebase.js';
+// تهيئة Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyAzYZMxqNmnLMGYnCyiJYPg2MbxZMt0co0",
+    authDomain: "osama-91b95.firebaseapp.com",
+    databaseURL: "https://osama-91b95-default-rtdb.firebaseio.com",
+    projectId: "osama-91b95",
+    storageBucket: "osama-91b95.appspot.com",
+    messagingSenderId: "118875905722",
+    appId: "1:118875905722:web:200bff1bd99db2c1caac83",
+    measurementId: "G-LEM5PVPJZC"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+const auth = firebase.auth();
 
 // المتغيرات العامة
 let currentUserId = null;
@@ -24,14 +32,13 @@ let filterSettings = {
 // تهيئة الصفحة عند تحميلها
 document.addEventListener('DOMContentLoaded', function() {
     // التحقق من حالة تسجيل الدخول
-    onAuthStateChanged(auth, async (user) => {
+    auth.onAuthStateChanged(async (user) => {
         if (user) {
             currentUserId = user.uid;
             await loadUserData();
             await loadReportsData();
             setupEventListeners();
             loadFilterPreferences();
-            setupFooterEventListeners();
         } else {
             // توجيه المستخدم إلى صفحة تسجيل الدخول إذا لم يكن مسجلاً
             window.location.href = 'login.html';
@@ -42,23 +49,23 @@ document.addEventListener('DOMContentLoaded', function() {
 // تحميل بيانات المستخدم
 async function loadUserData() {
     try {
-        const userRef = ref(database, 'users/' + currentUserId);
-        const snapshot = await get(userRef);
-        
-        if (snapshot.exists()) {
-            userData = snapshot.val();
-            
-            // تحديث واجهة المستخدم
-            document.getElementById('username').textContent = userData.name || userData.email.split('@')[0];
-            document.getElementById('user-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name || userData.email)}&background=random`;
-            document.getElementById('user-rank').textContent = `مرتبة ${userData.rank || 0}`;
-            
-            // التحقق من صلاحيات المشرف
-            if (userData.isAdmin) {
-                document.getElementById('admin-badge').style.display = 'inline-block';
-                document.getElementById('admin-nav').style.display = 'flex';
+        const userRef = database.ref('users/' + currentUserId);
+        userRef.once('value', (snapshot) => {
+            if (snapshot.exists()) {
+                userData = snapshot.val();
+                
+                // تحديث واجهة المستخدم
+                document.getElementById('username').textContent = userData.name || userData.email.split('@')[0];
+                document.getElementById('user-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name || userData.email)}&background=random`;
+                document.getElementById('user-rank').textContent = `مرتبة ${userData.rank || 0}`;
+                
+                // التحقق من صلاحيات المشرف
+                if (userData.isAdmin) {
+                    document.getElementById('admin-badge').style.display = 'inline-block';
+                    document.getElementById('admin-nav').style.display = 'flex';
+                }
             }
-        }
+        });
     } catch (error) {
         console.error("Error loading user data:", error);
     }
@@ -84,53 +91,6 @@ async function loadReportsData() {
         
     } catch (error) {
         console.error("Error loading reports data:", error);
-    }
-}
-
-// الحصول على جميع أعضاء الشبكة
-async function getAllNetworkMembers(userId) {
-    try {
-        // استخدام الدالة الجديدة من firebase.js
-        const members = [];
-        await getNetworkMembersRecursive(userId, 1, members);
-        return members;
-    } catch (error) {
-        console.error("Error getting network members:", error);
-        return [];
-    }
-}
-
-// دالة مساعدة لجلب أعضاء الشبكة بشكل متكرر
-async function getNetworkMembersRecursive(userId, level, members) {
-    try {
-        if (level > 1) { // لا نضيف المستخدم الرئيسي
-            const userRef = ref(database, 'users/' + userId);
-            const snapshot = await get(userRef);
-            
-            if (snapshot.exists()) {
-                const userData = snapshot.val();
-                userData.level = level - 1; // لأن level يبدأ من 1 للمستخدم الرئيسي
-                userData.id = userId;
-                members.push(userData);
-            }
-        }
-        
-        // الحصول على الإحالات المباشرة
-        const referralsRef = ref(database, 'userReferrals/' + userId);
-        const snapshot = await get(referralsRef);
-        
-        if (snapshot.exists()) {
-            const referrals = snapshot.val();
-            
-            // معالجة كل إحالة بشكل متوازي
-            const promises = Object.keys(referrals).map(async (memberId) => {
-                await getNetworkMembersRecursive(memberId, level + 1, members);
-            });
-            
-            await Promise.all(promises);
-        }
-    } catch (error) {
-        console.error("Error in recursive network member retrieval:", error);
     }
 }
 
@@ -202,7 +162,43 @@ function applyFilters(members) {
     return filtered;
 }
 
-// باقي الدوال تبقى كما هي (بدون تغيير)
+// الحصول على جميع أعضاء الشبكة
+async function getAllNetworkMembers(userId, level = 0, allMembers = []) {
+    try {
+        // إضافة المستخدم الحالي إلى القائمة
+        if (level > 0) { // لا نضيف المستخدم الرئيسي
+            const userRef = database.ref('users/' + userId);
+            const snapshot = await userRef.once('value');
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                userData.level = level;
+                userData.id = userId; // إضافة المعرف للاستخدام لاحقًا
+                allMembers.push(userData);
+            }
+        }
+        
+        // الحصول على الإحالات المباشرة
+        const referralsRef = database.ref('userReferrals/' + userId);
+        const snapshot = await referralsRef.once('value');
+        
+        if (snapshot.exists()) {
+            const referrals = snapshot.val();
+            
+            // معالجة كل إحالة بشكل متوازي
+            const promises = Object.keys(referrals).map(async (memberId) => {
+                await getAllNetworkMembers(memberId, level + 1, allMembers);
+            });
+            
+            await Promise.all(promises);
+        }
+        
+        return allMembers;
+    } catch (error) {
+        console.error("Error getting network members:", error);
+        return allMembers;
+    }
+}
+
 // تحميل إحصائيات الشبكة
 function loadNetworkStats(members) {
     // حساب الإحصائيات
@@ -572,8 +568,8 @@ async function renderActivityChart(members) {
 async function getRealActivityData(members) {
     try {
         // جلب بيانات النشاط من Firebase
-        const activityRef = ref(database, 'userActivity');
-        const snapshot = await get(activityRef);
+        const activityRef = database.ref('userActivity');
+        const snapshot = await activityRef.once('value');
         
         if (!snapshot.exists()) {
             throw new Error("No activity data found");
@@ -762,92 +758,6 @@ function setupEventListeners() {
     document.getElementById('export-report').addEventListener('click', exportReport);
 }
 
-// إعداد مستمعي الأحداث للفوتر
-function setupFooterEventListeners() {
-    // أيقونة الجروبات
-    const groupsIcon = document.getElementById('groups-icon');
-    if (groupsIcon) {
-        groupsIcon.addEventListener('click', (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if (user) {
-                window.location.href = 'dashboard.html';
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // أيقونة الدعم
-    const supportIcon = document.getElementById('support-icon');
-    if (supportIcon) {
-        supportIcon.addEventListener('click', (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if (user) {
-                window.location.href = 'messages.html';
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // أيقونة السلة
-    const cartIcon = document.getElementById('cart-icon');
-    if (cartIcon) {
-        cartIcon.addEventListener('click', (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if (user) {
-                alert('صفحة السلة قيد التطوير');
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // أيقونة المزيد
-    const moreIcon = document.getElementById('more-icon');
-    if (moreIcon) {
-        moreIcon.addEventListener('click', (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if (user) {
-                alert('صفحة المزيد قيد التطوير');
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // أيقونة القائمة الجانبية في الهيدر
-    const sidebarToggle = document.getElementById('sidebar-toggle');
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if (user) {
-                alert('القائمة الجانبية قيد التطوير');
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // زر الإضافة
-    const addButton = document.getElementById('add-button');
-    if (addButton) {
-        addButton.addEventListener('click', (e) => {
-            const user = auth.currentUser;
-            if (!user) {
-                e.preventDefault();
-                alert('يجب تسجيل الدخول أولاً');
-                window.location.href = 'login.html';
-            }
-        });
-    }
-}
-
 // معالج تطبيق الفلاتر
 async function applyFiltersHandler() {
     // جمع إعدادات الفلتر من النموذج
@@ -1011,4 +921,4 @@ function exportReport() {
     // تنزيل الملف
     link.click();
     document.body.removeChild(link);
-                }
+                                      }
