@@ -25,6 +25,7 @@ class DashboardManager {
       if (user) {
         await this.loadUserData(user.uid);
         this.setupEventListeners();
+        this.setupIconEventListeners();
         this.setupSocialShare();
         
         // بدء الاستماع لتغيرات المرتبة
@@ -584,6 +585,69 @@ class DashboardManager {
 
   formatNumber(num) {
     return new Intl.NumberFormat('ar-SA').format(num);
+  }
+
+  setupIconEventListeners() {
+    // أيقونة مجموعتك
+    document.getElementById('groups-icon').addEventListener('click', (e) => {
+        e.preventDefault();
+        this.handleIconClick('groups-icon');
+    });
+    
+    // أيقونة السلة
+    document.getElementById('cart-icon').addEventListener('click', (e) => {
+        e.preventDefault();
+        this.handleIconClick('cart-icon');
+    });
+    
+    // أيقونة الدعم
+    document.getElementById('support-icon').addEventListener('click', (e) => {
+        e.preventDefault();
+        this.handleIconClick('support-icon');
+    });
+    
+    // أيقونة المزيد
+    document.getElementById('more-icon').addEventListener('click', (e) => {
+        e.preventDefault();
+        this.handleIconClick('more-icon');
+    });
+    
+    // أيقونة الإشعارات
+    document.getElementById('notifications-icon').addEventListener('click', (e) => {
+        e.preventDefault();
+        this.handleIconClick('notifications-icon');
+    });
+    
+    // أيقونة القائمة الجانبية
+    document.getElementById('sidebar-toggle').addEventListener('click', (e) => {
+        e.preventDefault();
+        this.handleIconClick('sidebar-toggle');
+    });
+  }
+
+  // معالج النقر على الأيقونات
+  handleIconClick(iconId) {
+    const user = auth.currentUser;
+    if (user) {
+      // إذا كان المستخدم مسجلاً
+      switch(iconId) {
+        case 'groups-icon':
+          window.location.href = 'dashboard.html';
+          break;
+        case 'support-icon':
+          window.location.href = 'messages.html';
+          break;
+        case 'cart-icon':
+        case 'more-icon':
+        case 'notifications-icon':
+        case 'sidebar-toggle':
+          alert('هذه الميزة قيد التطوير حالياً');
+          break;
+      }
+    } else {
+      // إذا لم يكن المستخدم مسجلاً
+      window.location.href = 'login.html';
+    }
   }
 
   setupEventListeners() {
