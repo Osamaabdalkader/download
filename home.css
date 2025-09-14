@@ -50,24 +50,33 @@ header {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.header-top-left,
-.header-top-right {
+.header-top .icon {
+    position: relative;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
-    gap: 15px;
-    flex: 1;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #90e0ef;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(76, 201, 240, 0.3);
 }
 
-.header-top-right {
-    justify-content: flex-end;
+.header-top .icon:hover {
+    background: rgba(76, 201, 240, 0.2);
+    transform: translateY(-2px);
 }
 
 .logo-container {
     display: flex;
     align-items: center;
     gap: 10px;
-    justify-content: center;
-    flex: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .logo-image {
@@ -88,24 +97,9 @@ header {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.header-top .icon {
-    position: relative;
-    width: 36px;
-    height: 36px;
+.header-top-icons {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    color: #90e0ef;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(76, 201, 240, 0.3);
-}
-
-.header-top .icon:hover {
-    background: rgba(76, 201, 240, 0.2);
-    transform: translateY(-2px);
+    gap: 15px;
 }
 
 .notification-badge {
@@ -586,4 +580,4 @@ footer {
     .footer-icons .highlight span {
         display: none; /* التأكد من إخفاء النص تحت زر الإضافة */
     }
-                              }
+    }
