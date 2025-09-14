@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
             await loadReportsData();
             setupEventListeners();
             loadFilterPreferences();
+            setupFooterEventListeners(); // إضافة مستمعي الأحداث للفوتر
         } else {
             // توجيه المستخدم إلى صفحة تسجيل الدخول إذا لم يكن مسجلاً
             window.location.href = 'login.html';
@@ -758,6 +759,92 @@ function setupEventListeners() {
     document.getElementById('export-report').addEventListener('click', exportReport);
 }
 
+// إعداد مستمعي الأحداث للفوتر
+function setupFooterEventListeners() {
+    // أيقونة الجروبات
+    const groupsIcon = document.getElementById('groups-icon');
+    if (groupsIcon) {
+        groupsIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if (user) {
+                window.location.href = 'dashboard.html';
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    }
+
+    // أيقونة الدعم
+    const supportIcon = document.getElementById('support-icon');
+    if (supportIcon) {
+        supportIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if (user) {
+                window.location.href = 'messages.html';
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    }
+
+    // أيقونة السلة
+    const cartIcon = document.getElementById('cart-icon');
+    if (cartIcon) {
+        cartIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if (user) {
+                alert('صفحة السلة قيد التطوير');
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    }
+
+    // أيقونة المزيد
+    const moreIcon = document.getElementById('more-icon');
+    if (moreIcon) {
+        moreIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if (user) {
+                alert('صفحة المزيد قيد التطوير');
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    }
+
+    // أيقونة القائمة الجانبية في الهيدر
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if (user) {
+                alert('القائمة الجانبية قيد التطوير');
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    }
+
+    // زر الإضافة
+    const addButton = document.getElementById('add-button');
+    if (addButton) {
+        addButton.addEventListener('click', (e) => {
+            const user = auth.currentUser;
+            if (!user) {
+                e.preventDefault();
+                alert('يجب تسجيل الدخول أولاً');
+                window.location.href = 'login.html';
+            }
+        });
+    }
+}
+
 // معالج تطبيق الفلاتر
 async function applyFiltersHandler() {
     // جمع إعدادات الفلتر من النموذج
@@ -921,4 +1008,4 @@ function exportReport() {
     // تنزيل الملف
     link.click();
     document.body.removeChild(link);
-                                      }
+        }
