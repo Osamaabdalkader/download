@@ -1,4 +1,4 @@
-** home.css - الإصدار المحسن */
+/* home.css - الإصدار المحسن */
 
 /* أنماط عامة */
 * {
@@ -390,6 +390,16 @@ footer {
     transform: scale(0.9);
     box-shadow: 0 2px 8px rgba(249, 215, 28, 0.6);
 }
+
+.gold-bar {
+    height: 4px;
+    background: linear-gradient(90deg, #d4af37, #f9d71c, #d4af37);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+} 
+
 
 /* تحميل المحتوى */
 .posts-loading {
