@@ -21,7 +21,7 @@ let charts = {};
 let userData = {};
 let allMembers = [];
 let filterSettings = {
-    timeFilter: '30',
+    timeFilter: '7', // تغيير القيمة الافتراضية إلى 7 أيام
     levelFilter: 'all',
     rankFilter: 'all',
     activityFilter: 'all',
@@ -31,6 +31,9 @@ let filterSettings = {
 
 // تهيئة الصفحة عند تحميلها
 document.addEventListener('DOMContentLoaded', function() {
+    // إعداد مستمعي الأحداث للأيقونات
+    setupIconEventListeners();
+    
     // التحقق من حالة تسجيل الدخول
     auth.onAuthStateChanged(async (user) => {
         if (user) {
@@ -39,13 +42,77 @@ document.addEventListener('DOMContentLoaded', function() {
             await loadReportsData();
             setupEventListeners();
             loadFilterPreferences();
-            setupFooterEventListeners(); // إضافة مستمعي الأحداث للفوتر
         } else {
             // توجيه المستخدم إلى صفحة تسجيل الدخول إذا لم يكن مسجلاً
             window.location.href = 'login.html';
         }
     });
 });
+
+// إعداد مستمعي الأحداث للأيقونات
+function setupIconEventListeners() {
+    // أيقونة مجموعتك
+    document.getElementById('groups-icon').addEventListener('click', function(e) {
+        e.preventDefault();
+        handleIconClick('groups-icon');
+    });
+    
+    // أيقونة السلة
+    document.getElementById('cart-icon').addEventListener('click', function(e) {
+        e.preventDefault();
+        handleIconClick('cart-icon');
+    });
+    
+    // أيقونة الدعم
+    document.getElementById('support-icon').addEventListener('click', function(e) {
+        e.preventDefault();
+        handleIconClick('support-icon');
+    });
+    
+    // أيقونة المزيد
+    document.getElementById('more-icon').addEventListener('click', function(e) {
+        e.preventDefault();
+        handleIconClick('more-icon');
+    });
+    
+    // أيقونة الإشعارات
+    document.getElementById('notifications-icon').addEventListener('click', function(e) {
+        e.preventDefault();
+        handleIconClick('notifications-icon');
+    });
+    
+    // أيقونة القائمة الجانبية
+    document.getElementById('sidebar-toggle').addEventListener('click', function(e) {
+        e.preventDefault();
+        handleIconClick('sidebar-toggle');
+    });
+}
+
+// معالج النقر على الأيقونات
+function handleIconClick(iconId) {
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            // إذا كان المستخدم مسجلاً
+            switch(iconId) {
+                case 'groups-icon':
+                    window.location.href = 'dashboard.html';
+                    break;
+                case 'support-icon':
+                    window.location.href = 'messages.html';
+                    break;
+                case 'cart-icon':
+                case 'more-icon':
+                case 'notifications-icon':
+                case 'sidebar-toggle':
+                    alert('هذه الميزة قيد التطوير حالياً');
+                    break;
+            }
+        } else {
+            // إذا لم يكن المستخدم مسجلاً
+            window.location.href = 'login.html';
+        }
+    });
+}
 
 // تحميل بيانات المستخدم
 async function loadUserData() {
@@ -58,12 +125,11 @@ async function loadUserData() {
                 // تحديث واجهة المستخدم
                 document.getElementById('username').textContent = userData.name || userData.email.split('@')[0];
                 document.getElementById('user-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name || userData.email)}&background=random`;
-                document.getElementById('user-rank').textContent = `مرتبة ${userData.rank || 0}`;
+                document.getElementById('user-rank-display').textContent = `مرتبة: ${userData.rank || 0}`;
                 
                 // التحقق من صلاحيات المشرف
                 if (userData.isAdmin) {
                     document.getElementById('admin-badge').style.display = 'inline-block';
-                    document.getElementById('admin-nav').style.display = 'flex';
                 }
             }
         });
@@ -759,92 +825,6 @@ function setupEventListeners() {
     document.getElementById('export-report').addEventListener('click', exportReport);
 }
 
-// إعداد مستمعي الأحداث للفوتر
-function setupFooterEventListeners() {
-    // أيقونة الجروبات
-    const groupsIcon = document.getElementById('groups-icon');
-    if (groupsIcon) {
-        groupsIcon.addEventListener('click', (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if (user) {
-                window.location.href = 'dashboard.html';
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // أيقونة الدعم
-    const supportIcon = document.getElementById('support-icon');
-    if (supportIcon) {
-        supportIcon.addEventListener('click', (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if (user) {
-                window.location.href = 'messages.html';
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // أيقونة السلة
-    const cartIcon = document.getElementById('cart-icon');
-    if (cartIcon) {
-        cartIcon.addEventListener('click', (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if (user) {
-                alert('صفحة السلة قيد التطوير');
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // أيقونة المزيد
-    const moreIcon = document.getElementById('more-icon');
-    if (moreIcon) {
-        moreIcon.addEventListener('click', (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if (user) {
-                alert('صفحة المزيد قيد التطوير');
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // أيقونة القائمة الجانبية في الهيدر
-    const sidebarToggle = document.getElementById('sidebar-toggle');
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            if (user) {
-                alert('القائمة الجانبية قيد التطوير');
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // زر الإضافة
-    const addButton = document.getElementById('add-button');
-    if (addButton) {
-        addButton.addEventListener('click', (e) => {
-            const user = auth.currentUser;
-            if (!user) {
-                e.preventDefault();
-                alert('يجب تسجيل الدخول أولاً');
-                window.location.href = 'login.html';
-            }
-        });
-    }
-}
-
 // معالج تطبيق الفلاتر
 async function applyFiltersHandler() {
     // جمع إعدادات الفلتر من النموذج
@@ -891,7 +871,7 @@ async function applyFiltersHandler() {
 // إعادة تعيين الفلاتر
 function resetFilters() {
     // إعادة تعيين القيم الافتراضية
-    document.getElementById('time-filter').value = '30';
+    document.getElementById('time-filter').value = '7';
     document.getElementById('level-filter').value = 'all';
     document.getElementById('rank-filter').value = 'all';
     document.getElementById('activity-filter').value = 'all';
@@ -901,7 +881,7 @@ function resetFilters() {
     
     // إعادة تعيين إعدادات الفلتر
     filterSettings = {
-        timeFilter: '30',
+        timeFilter: '7',
         levelFilter: 'all',
         rankFilter: 'all',
         activityFilter: 'all',
@@ -1008,4 +988,4 @@ function exportReport() {
     // تنزيل الملف
     link.click();
     document.body.removeChild(link);
-    }
+}
