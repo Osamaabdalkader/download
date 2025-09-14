@@ -1,4 +1,4 @@
-/* post-detail.css - تصميم صفحة تفاصيل المنشور */
+/* post-detail.css - تصميم صفحة تفاصيل المنشور المتناسق مع reports */
 
 /* متغيرات الألوان لتتناسب مع التصميم الرئيسي */
 :root {
@@ -19,69 +19,154 @@
   --transition: all 0.3s ease;
 }
 
-/* إعدادات عامة */
-body {
-  font-family: 'Tajawal', sans-serif;
-  background-color: var(--light-color);
-  color: var(--dark-color);
-  line-height: 1.6;
+/* أنماط عامة */
+* {
   margin: 0;
   padding: 0;
-  padding-bottom: 70px; /* مساحة للفوتر الثابت */
+  box-sizing: border-box;
+  font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* شريط الرأس */
-header {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: white;
-  padding: 1rem;
-  box-shadow: var(--shadow-md);
-  position: sticky;
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+
+/* شريط الذهبي (مطابق لصفحة التقارير) */
+.gold-bar {
+  height: 4px;
+  background: linear-gradient(90deg, #d4af37, #f9d71c, #d4af37);
+  position: absolute;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
 }
 
-.header-content {
+/* شريط الرأس (مطابق لصفحة التقارير) */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  border-bottom: 3px solid #4cc9f0;
+}
+
+.header-top {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 12px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .home-icon {
-  position: absolute;
-  right: 0;
-  color: white;
-  font-size: 1.5rem;
-  transition: var(--transition);
+  position: relative;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #90e0ef;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(76, 201, 240, 0.3);
+  text-decoration: none;
 }
 
 .home-icon:hover {
-  transform: scale(1.1);
+  background: rgba(76, 201, 240, 0.2);
+  transform: translateY(-2px);
 }
 
-.header-content h1 {
-  margin: 0;
-  font-size: 1.5rem;
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4cc9f0;
+  box-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+}
+
+.logo-container h1 {
+  font-size: 1.2rem;
   font-weight: 700;
+  background: linear-gradient(to right, #4cc9f0, #90e0ef);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header-top-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.header-top-icons .icon {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #90e0ef;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(76, 201, 240, 0.3);
+  cursor: pointer;
+}
+
+.header-top-icons .icon:hover {
+  background: rgba(76, 201, 240, 0.2);
+  transform: translateY(-2px);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
 }
 
 /* المحتوى الرئيسي */
 .container {
+  padding: 140px 15px 120px;
   max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  margin: 0 auto;
 }
 
 /* تفاصيل المنشور */
 #post-detail-content {
-  background: white;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 2rem;
   box-shadow: var(--shadow-md);
   margin-bottom: 2rem;
+  border: 1px solid rgba(76, 201, 240, 0.2);
+  backdrop-filter: blur(5px);
 }
 
 .post-detail-image {
@@ -94,14 +179,14 @@ header {
 }
 
 .post-detail-title {
-  color: var(--dark-color);
+  color: #90e0ef;
   font-size: 1.8rem;
   margin: 0 0 1rem 0;
   font-weight: 700;
 }
 
 .post-detail-description {
-  color: var(--gray-600);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 1.1rem;
   line-height: 1.8;
   margin-bottom: 2rem;
@@ -119,18 +204,20 @@ header {
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-  background: var(--gray-100);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
+  border: 1px solid rgba(76, 201, 240, 0.2);
 }
 
 .meta-item i {
-  color: var(--primary-color);
+  color: #4cc9f0;
   font-size: 1.2rem;
   width: 24px;
 }
 
 .meta-item span {
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .post-detail-author {
@@ -138,16 +225,17 @@ header {
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
-  background: var(--gray-100);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  border-left: 4px solid var(--primary-color);
+  border-left: 4px solid #4cc9f0;
+  border: 1px solid rgba(76, 201, 240, 0.2);
 }
 
 .author-avatar {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  background: linear-gradient(135deg, #4cc9f0 0%, #3a86ff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,11 +250,11 @@ header {
 .author-name {
   font-weight: 600;
   margin-bottom: 0.25rem;
-  color: var(--dark-color);
+  color: #90e0ef;
 }
 
 .author-contact {
-  color: var(--gray-600);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
 }
 
@@ -177,7 +265,7 @@ header {
 }
 
 .btn {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  background: linear-gradient(90deg, #4cc9f0, #3a86ff);
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -185,18 +273,23 @@ header {
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: var(--transition);
-  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(58, 134, 255, 0.4);
   min-width: 200px;
 }
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 8px 20px rgba(58, 134, 255, 0.6);
 }
 
 .btn-success {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(90deg, #10b981, #059669);
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+}
+
+.btn-success:hover {
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.6);
 }
 
 /* حالات التحميل والخطأ */
@@ -204,7 +297,7 @@ header {
 .error {
   text-align: center;
   padding: 3rem;
-  color: var(--gray-500);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 1.1rem;
 }
 
@@ -212,24 +305,24 @@ header {
   color: #ef4444;
 }
 
-/* شريط التذييل */
+/* تصميم التذييل (مطابق لصفحة التقارير) */
 footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: white;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 0;
-  z-index: 100;
+  background: linear-gradient(90deg, #0f2027, #203a43);
+  border-top: 3px solid #4cc9f0;
+  z-index: 1000;
+  padding: 15px 0 10px;
+  height: 60px;
 }
 
 .footer-icons {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 500px;
-  margin: 0 auto;
+  height: 100%;
 }
 
 .footer-icons .icon {
@@ -237,41 +330,72 @@ footer {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: var(--gray-500);
-  font-size: 0.9rem;
-  transition: var(--transition);
-  padding: 0.5rem;
-  border-radius: 8px;
-}
-
-.footer-icons .icon:hover {
-  color: var(--primary-color);
-  background: var(--gray-100);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  flex: 1;
+  padding: 5px 0;
+  cursor: pointer;
 }
 
 .footer-icons .icon i {
-  font-size: 1.2rem;
-  margin-bottom: 0.25rem;
+  font-size: 1.3rem;
+  margin-bottom: 3px;
 }
 
-.footer-icons .icon.highlight {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: white;
-  padding: 0.75rem;
+.footer-icons .icon:hover {
+  color: #90e0ef;
+}
+
+.footer-icons .highlight {
+  position: relative;
+  color: #0f2027;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  margin-top: -20px;
-  box-shadow: var(--shadow-md);
+  background: linear-gradient(90deg, #d4af37, #f9d71c);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -25px;
+  box-shadow: 0 5px 15px rgba(249, 215, 28, 0.4);
+  animation: float 3s ease-in-out infinite, pulse 2s infinite;
+  transition: all 0.3s ease;
 }
 
-.footer-icons .icon.highlight:hover {
-  transform: scale(1.1);
-  box-shadow: var(--shadow-lg);
+.footer-icons .highlight i {
+  font-size: 1.6rem;
+}
+
+.footer-icons .highlight span {
+  display: none;
+}
+
+.footer-icons .highlight:active {
+  transform: scale(0.9);
+  box-shadow: 0 2px 8px rgba(249, 215, 28, 0.6);
+}
+
+/* أنيميشن */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(249, 215, 28, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(249, 215, 28, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(249, 215, 28, 0); }
 }
 
 /* تصميم متجاوب */
 @media (max-width: 768px) {
   .container {
-    margin: 1rem auto;
+    padding: 140px 10px 110px;
   }
   
   #post-detail-content {
@@ -294,9 +418,29 @@ footer {
   .purchase-section {
     margin-top: 1.5rem;
   }
+  
+  .logo-container h1 {
+    font-size: 1rem;
+  }
+  
+  .header-top-icons .icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+  
+  .home-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .container {
+    padding: 120px 8px 100px;
+  }
+  
   #post-detail-content {
     padding: 1rem;
   }
@@ -315,16 +459,21 @@ footer {
     gap: 0.5rem;
   }
   
-  .header-content h1 {
-    font-size: 1.25rem;
-  }
-  
-  .footer-icons .icon span {
-    font-size: 0.8rem;
+  .footer-icons .icon {
+    font-size: 0.75rem;
   }
   
   .footer-icons .icon i {
-    font-size: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .footer-icons .highlight {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .footer-icons .highlight i {
+    font-size: 1.5rem;
   }
 }
 
