@@ -46,9 +46,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 20px; /* زيادة التباعد */
+    padding: 13px 20px; /* زيادة التباعد */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    min-height: 85px; /* زيادة ارتفاع الصف الأول */
+    min-height: 75px; /* زيادة ارتفاع الصف الأول */
 }
 
 .header-top .icon {
@@ -83,8 +83,8 @@ header {
 }
 
 .logo-image {
-    width: 50px; /* زيادة حجم الشعار */
-    height: 50px;
+    width: 45px; /* زيادة حجم الشعار */
+    height: 45px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #4cc9f0;
