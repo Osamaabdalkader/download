@@ -21,6 +21,27 @@ body {
     margin: 0 auto;
 }
 
+/* عنوان الصفحة */
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #4cc9f0, #90e0ef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+}
+
 /* تصميم الهيدر (مطابق للصفحة الرئيسية) */
 header {
     position: fixed;
@@ -1047,16 +1068,20 @@ footer {
     .stat-card {
         padding: 12px;
         gap: 10px;
+        flex-direction: column;
+        text-align: center;
     }
 
     .stat-icon {
         width: 40px;
         height: 40px;
         font-size: 1.2rem;
+        margin-bottom: 8px;
     }
 
     .stat-info h3 {
         font-size: 1.4rem;
+        margin-bottom: 3px;
     }
 
     .stat-info p {
@@ -1066,6 +1091,8 @@ footer {
     .stat-trend {
         font-size: 0.7rem;
         padding: 3px 8px;
+        margin-left: 0;
+        margin-top: 5px;
     }
 
     /* رابط التسريع - أصغر حجماً */
@@ -1080,6 +1107,7 @@ footer {
 
     .referral-input-group {
         margin-bottom: 15px;
+        flex-direction: column;
     }
 
     .referral-input-group input {
@@ -1138,6 +1166,7 @@ footer {
     .page-filter {
         padding: 6px 10px;
         font-size: 0.85rem;
+        width: 100%;
     }
 
     .data-table th,
