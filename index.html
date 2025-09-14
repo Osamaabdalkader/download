@@ -23,7 +23,7 @@
         }
 
         .container {
-            padding: 160px 15px 120px;
+            padding: 180px 15px 80px; /* تقليل المسافة بعد آخر منشور */
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -53,21 +53,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 15px;
+            padding: 15px 20px; /* زيادة التباعد */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 80px; /* زيادة ارتفاع الصف الأول */
         }
 
         .header-top .icon {
             position: relative;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             color: #90e0ef;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
             border: 1px solid rgba(76, 201, 240, 0.3);
         }
@@ -80,15 +81,15 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
         }
 
         .logo-image {
-            width: 45px;
-            height: 45px;
+            width: 50px; /* زيادة حجم الشعار */
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #4cc9f0;
@@ -96,7 +97,7 @@
         }
 
         .logo-container h1 {
-            font-size: 1.3rem;
+            font-size: 1.4rem; /* زيادة حجم النص */
             font-weight: 700;
             background: linear-gradient(to right, #4cc9f0, #90e0ef);
             -webkit-background-clip: text;
@@ -126,10 +127,10 @@
         }
 
         .header-bottom {
-            padding: 12px 15px;
+            padding: 15px 20px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
         }
 
         .search-container {
@@ -141,12 +142,12 @@
 
         .search-input {
             flex: 1;
-            padding: 10px 15px;
+            padding: 12px 18px;
             border: none;
             border-radius: 20px 0 0 20px;
             background: rgba(255, 255, 255, 0.15);
             color: white;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             border: 1px solid rgba(76, 201, 240, 0.3);
             border-right: none;
         }
@@ -161,7 +162,7 @@
         }
 
         .search-btn {
-            padding: 10px 18px;
+            padding: 12px 20px;
             border: none;
             border-radius: 0 20px 20px 0;
             background: linear-gradient(90deg, #4cc9f0, #3a86ff);
@@ -177,7 +178,7 @@
         .filters-row {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .filter-category, .filter-location {
@@ -185,13 +186,13 @@
         }
 
         .filter-select {
-            padding: 8px 12px;
+            padding: 10px 15px;
             border-radius: 15px;
             border: 1px solid rgba(76, 201, 240, 0.3);
             background: rgba(0, 0, 0, 0.3);
             color: white;
-            font-size: 0.85rem;
-            min-width: 120px;
+            font-size: 0.9rem;
+            min-width: 130px;
         }
 
         .filter-select:focus {
@@ -325,7 +326,7 @@
             font-size: 1.1rem;
         }
 
-        /* تصميم الفوتر مع زيادة الارتفاع */
+        /* تصميم الفوتر */
         footer {
             position: fixed;
             bottom: 0;
@@ -390,7 +391,7 @@
         }
 
         .footer-icons .highlight span {
-            display: none; /* إخفاء النص تحت زر الإضافة */
+            display: none;
         }
 
         .footer-icons .highlight:active {
@@ -442,7 +443,7 @@
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
-                padding: 10px 15px;
+                padding: 15px 20px;
                 height: auto;
             }
             
@@ -459,32 +460,32 @@
             }
             
             .container {
-                padding-top: 140px;
+                padding-top: 160px;
             }
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 160px 10px 110px;
+                padding: 170px 10px 70px;
             }
             
             .logo-container h1 {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .header-top .icon {
-                width: 32px;
-                height: 32px;
-                font-size: 1rem;
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
             }
             
             .search-input {
-                padding: 8px 12px;
-                font-size: 0.85rem;
+                padding: 10px 15px;
+                font-size: 0.9rem;
             }
             
             .search-btn {
-                padding: 8px 15px;
+                padding: 10px 16px;
             }
             
             .filters-row {
@@ -493,9 +494,9 @@
             }
             
             .filter-select {
-                min-width: 110px;
-                font-size: 0.8rem;
-                padding: 6px 10px;
+                min-width: 120px;
+                font-size: 0.85rem;
+                padding: 8px 12px;
             }
             
             .posts-grid {
@@ -535,34 +536,33 @@
             }
             
             .header-top {
-                padding: 10px;
+                padding: 12px 15px;
             }
             
             .logo-image {
-                width: 40px;
-                height: 40px;
+                width: 45px;
+                height: 45px;
             }
             
             .logo-container h1 {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             .header-bottom {
-                padding: 10px;
+                padding: 12px 15px;
             }
             
             .filters-row {
                 flex-direction: row;
-                gap: 8px;
+                gap: 10px;
                 justify-content: flex-end;
             }
             
             .filter-select {
                 width: auto;
-                min-width: 100px;
+                min-width: 110px;
             }
             
-            /* إظهار النص تحت الأيقونات في الشريط السفلي للشاشات الصغيرة */
             .footer-icons .icon span {
                 display: block;
                 font-size: 0.7rem;
@@ -585,31 +585,26 @@
             }
             
             .footer-icons .highlight span {
-                display: none; /* التأكد من إخفاء النص تحت زر الإضافة */
+                display: none;
             }
             
             /* تعديلات إضافية للهيدر على الشاشات الصغيرة */
             .header-top {
-                padding: 8px 10px;
+                min-height: 70px;
             }
             
             .logo-container {
-                gap: 8px;
-            }
-            
-            .logo-image {
-                width: 35px;
-                height: 35px;
+                gap: 10px;
             }
             
             .header-top .icon {
-                width: 30px;
-                height: 30px;
-                font-size: 0.9rem;
+                width: 34px;
+                height: 34px;
+                font-size: 1rem;
             }
             
             .header-top-icons {
-                gap: 10px;
+                gap: 12px;
             }
         }
     </style>
@@ -636,7 +631,7 @@
                     <i class="fas fa-bell"></i>
                     <span class="notification-badge">3</span>
                 </div>
-                <!-- أيقونة القائمة الجانبية الجديدة -->
+                <!-- أيقونة القائمة الجانبية -->
                 <div class="icon" id="sidebar-toggle">
                     <i class="fas fa-bars"></i>
                 </div>
@@ -681,9 +676,77 @@
     <!-- الصفحة الرئيسية -->
     <div class="container">
         <div class="posts-grid" id="posts-container">
-            <div class="posts-loading">
-                <div class="spinner"></div>
-                <p>جاري تحميل المنشورات...</p>
+            <!-- منشورات وهمية للعرض -->
+            <div class="post-card">
+                <div class="post-image">
+                    <div class="no-image"><i class="fas fa-image"></i></div>
+                </div>
+                <div class="post-content">
+                    <h3 class="post-title">منتج رائع للبيع</h3>
+                    <p class="post-description">هذا وصف مختصر للمنتج الذي يعرض خصائصه ومميزاته الرئيسية التي تجعله فريداً</p>
+                    <div class="post-details">
+                        <div class="detail-item"><i class="fas fa-tag"></i> الكترونيات</div>
+                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> صنعاء</div>
+                    </div>
+                    <div class="post-meta">
+                        <div class="post-time"><i class="far fa-clock"></i> منذ ساعة</div>
+                        <div class="post-author"><i class="far fa-user"></i> أحمد</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-card">
+                <div class="post-image">
+                    <div class="no-image"><i class="fas fa-image"></i></div>
+                </div>
+                <div class="post-content">
+                    <h3 class="post-title">شقة فاخرة للإيجار</h3>
+                    <p class="post-description">شقة فاخرة في حي راقي بمساحة 180م تتكون من 3 غرف نوم وصالتين و3 حمامات</p>
+                    <div class="post-details">
+                        <div class="detail-item"><i class="fas fa-tag"></i> عقارات</div>
+                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> تعز</div>
+                    </div>
+                    <div class="post-meta">
+                        <div class="post-time"><i class="far fa-clock"></i> منذ 3 ساعات</div>
+                        <div class="post-author"><i class="far fa-user"></i> محمد</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-card">
+                <div class="post-image">
+                    <div class="no-image"><i class="fas fa-image"></i></div>
+                </div>
+                <div class="post-content">
+                    <h3 class="post-title">وظيفة محاسب</h3>
+                    <p class="post-description">مطلوب محاسب مؤهل لديه خبرة لا تقل عن 3 سنوات في مجال المحاسبة</p>
+                    <div class="post-details">
+                        <div class="detail-item"><i class="fas fa-tag"></i> وظائف</div>
+                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> عدن</div>
+                    </div>
+                    <div class="post-meta">
+                        <div class="post-time"><i class="far fa-clock"></i> منذ يوم</div>
+                        <div class="post-author"><i class="far fa-user"></i> شركة التقوى</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-card">
+                <div class="post-image">
+                    <div class="no-image"><i class="fas fa-image"></i></div>
+                </div>
+                <div class="post-content">
+                    <h3 class="post-title">ملابس أطفال</h3>
+                    <p class="post-description">مجموعة رائعة من ملابس الأطفال بجودة عالية وأسعار مناسبة</p>
+                    <div class="post-details">
+                        <div class="detail-item"><i class="fas fa-tag"></i> ملابس</div>
+                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> حضرموت</div>
+                    </div>
+                    <div class="post-meta">
+                        <div class="post-time"><i class="far fa-clock"></i> منذ يومين</div>
+                        <div class="post-author"><i class="far fa-user"></i> سارة</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -715,6 +778,17 @@
     </footer>
 
     <!-- Firebase SDK -->
-    <script type="module" src="app.js"></script>
+    <script type="module">
+        // محاكاة تحميل المحتوى
+        document.addEventListener('DOMContentLoaded', function() {
+            const postsContainer = document.getElementById('posts-container');
+            const loadingElement = document.querySelector('.posts-loading');
+            
+            // محاكاة وقت التحميل
+            setTimeout(() => {
+                loadingElement.style.display = 'none';
+            }, 1500);
+        });
+    </script>
 </body>
     </html>
