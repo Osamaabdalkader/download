@@ -46,7 +46,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 20px; /* زيادة التباعد */
+    padding: 10px 20px; /* زيادة التباعد */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     min-height: 65px; /* زيادة ارتفاع الصف الأول */
 }
@@ -77,14 +77,14 @@ header {
     align-items: center;
     gap: 12px;
     position: absolute;
-    left: 60%;
+    left: 55%;
     transform: translateX(-50%);
     white-space: nowrap; /* منع العنوان من الالتفاف إلى سطرين */
 }
 
 .logo-image {
-    width: 30px; /* زيادة حجم الشعار */
-    height: 30px;
+    width: 25px; /* زيادة حجم الشعار */
+    height: 25px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #4cc9f0;
