@@ -42,49 +42,41 @@ header {
     right: 0;
 }
 
-.header-top {
+
+.header-top-icons {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 20px; /* زيادة التباعد */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    min-height: 60px; /* زيادة ارتفاع الصف الأول */
+    gap: 15px;
 }
 
-.header-top .icon {
+.header-top-icons .icon {
     position: relative;
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     color: #90e0ef;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
     border: 1px solid rgba(76, 201, 240, 0.3);
-    flex-shrink: 0;
 }
 
-.header-top .icon:hover {
+.header-top-icons .icon:hover {
     background: rgba(76, 201, 240, 0.2);
     transform: translateY(-2px);
 }
-
+}
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 12px;
-    position: absolute;
-    left: 55%;
-    transform: translateX(-50%);
-    white-space: nowrap; /* منع العنوان من الالتفاف إلى سطرين */
+    gap: 10px;
 }
 
 .logo-image {
-    width:45px; /* زيادة حجم الشعار */
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #4cc9f0;
@@ -92,7 +84,7 @@ header {
 }
 
 .logo-container h1 {
-    font-size: 1rem; /* زيادة حجم النص */
+    font-size: 1.2rem;
     font-weight: 700;
     background: linear-gradient(to right, #4cc9f0, #90e0ef);
     -webkit-background-clip: text;
@@ -181,7 +173,7 @@ header {
 }
 
 .filter-select {
-    padding: 10px 15px;
+    padding: 8px 10px;
     border-radius: 15px;
     border: 1px solid rgba(76, 201, 240, 0.3);
     background: rgba(0, 0, 0, 0.3);
@@ -469,15 +461,15 @@ footer {
     }
 
     .logo-image {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
     } 
 
     
     .header-top .icon {
-        width: 40px;
-        height: 40px;
-        font-size: 0.1rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
     }
     
     .search-input {
@@ -537,13 +529,12 @@ footer {
     }
     
     .header-top {
-        padding: 6px 10px;
-        min-height: 55px;
+        padding: 10px;
     }
     
     .logo-image {
-        width: 42px;
-        height: 42px;
+        width: 35px;
+        height: 35px;
     }
     
     .logo-container h1 {
