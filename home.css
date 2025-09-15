@@ -46,9 +46,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 5px; /* زيادة التباعد */
+    padding: 18px 20px; /* زيادة التباعد */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    min-height: 40px; /* زيادة ارتفاع الصف الأول */
+    min-height: 60px; /* زيادة ارتفاع الصف الأول */
 }
 
 .header-top .icon {
@@ -83,8 +83,8 @@ header {
 }
 
 .logo-image {
-    width:50px; /* زيادة حجم الشعار */
-    height: 50px;
+    width:45px; /* زيادة حجم الشعار */
+    height: 45px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #4cc9f0;
@@ -455,18 +455,24 @@ footer {
     }
     
     .container {
-        padding-top: 160px;
+        padding-top: 180px;
     }
 }
 
 @media (max-width: 768px) {
     .container {
-        padding: 160px 10px 20px;
+        padding: 170px 10px 10px;
     }
     
     .logo-container h1 {
         font-size: 1rem;
     }
+
+    .logo-image {
+        width: 45px;
+        height: 45px;
+    } 
+
     
     .header-top .icon {
         width: 40px;
@@ -531,21 +537,21 @@ footer {
     }
     
     .header-top {
-        padding: 15px 12px;
-        min-height: 75px;
+        padding: 12px 10px;
+        min-height: 65px;
     }
     
     .logo-image {
-        width: 35px;
-        height: 35px;
+        width: 32px;
+        height: 32px;
     }
     
     .logo-container h1 {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .header-bottom {
-        padding: 12px 15px;
+        padding: 10px 12px;
     }
     
     .filters-row {
