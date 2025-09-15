@@ -3,61 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول - منصة تسريع</title>
+    <title>تسجيل الدخول - نظام الإحالة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login.css">
 </head>
-
 <body>
-    <!-- الشريط الذهبي -->
     <div class="gold-bar"></div>
+    <div class="background-animation"></div>
+    
+    <div class="logo-container">
+        <img src="https://cdn-icons-png.flaticon.com/512/2170/2170153.png" alt="شعار النظام" class="logo">
+        <h1>نظام الإحالة المتقدم</h1>
+    </div>
     
     <div class="container">
-        <!-- الشعار الكبير -->
-        <div class="logo-container">
-            <img src="tasreea.png" alt="منصة تسريع الإلكترونية" class="logo-image">
-            <h1>منصة تسريع الإلكترونية</h1>
-        </div>
-        
-        <header>
-            <h1><i class="fas fa-user-circle"></i> تسجيل الدخول</h1>
-            <p>ادخل إلى حسابك لإدارة شبكة الإحالات الخاصة بك</p>
-        </header>
-        
-        <div class="tab-content active">
-            <!-- باقي محتوى النموذج يبقى كما هو -->
+        <div class="form-container">
+            <div class="form-header">
+                <h2><i class="fas fa-user-circle"></i> تسجيل الدخول</h2>
+                <p>ادخل إلى حسابك لإدارة شبكة الإحالات الخاصة بك</p>
+            </div>
+            
             <form id="login-form">
-                <div class="form-group">
-                    <label for="login-email">البريد الإلكتروني</label>
+                <div class="input-group">
+                    <i class="fas fa-envelope icon"></i>
                     <input type="email" id="login-email" placeholder="أدخل بريدك الإلكتروني" required>
                 </div>
                 
-                <div class="form-group">
-                    <label for="login-password">كلمة المرور</label>
+                <div class="input-group">
+                    <i class="fas fa-lock icon"></i>
                     <input type="password" id="login-password" placeholder="أدخل كلمة المرور" required>
+                    <i class="fas fa-eye toggle-password"></i>
                 </div>
                 
-                <button type="submit">تسجيل الدخول</button>
+                <div class="remember-forgot">
+                    <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        تذكرني
+                    </label>
+                    <a href="#" class="forgot-link">نسيت كلمة المرور؟</a>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <span>تسجيل الدخول</span>
+                    <i class="fas fa-arrow-left"></i>
+                </button>
             </form>
             
             <div class="alert" id="login-alert"></div>
             
-            <p style="margin-top: 20px; text-align: center;">
-                ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a>
-            </p>
+            <div class="alternative-options">
+                <div class="divider">
+                    <span>أو</span>
+                </div>
+                
+                <div class="social-login">
+                    <button class="social-btn google">
+                        <i class="fab fa-google"></i>
+                        Google
+                    </button>
+                    <button class="social-btn facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        Facebook
+                    </button>
+                </div>
+            </div>
             
-            <p style="text-align: center;">
-                <a href="index.html">العودة إلى الصفحة الرئيسية</a>
-            </p>
+            <div class="form-footer">
+                <p>ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a></p>
+                <p><a href="index.html">العودة إلى الصفحة الرئيسية</a></p>
+            </div>
         </div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script type="module" src="firebase.js"></script>
-    <script type="module" src="auth.js"></script>
-    <script type="module" src="login.js"></script>
-        </body>
-
-    
-    
-    
+    <script>
+        // كود JavaScript لإظهار/إخفاء كلمة المرور
+        document.querySelectorAll('.toggle-password').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const passwordInput = this.previousElementSibling;
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            });
+        });
+    </script>
+</body>
+    </html>
