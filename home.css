@@ -46,7 +46,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 10px; /* زيادة التباعد */
+    padding: 10px 5px; /* زيادة التباعد */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     min-height: 40px; /* زيادة ارتفاع الصف الأول */
 }
@@ -83,8 +83,8 @@ header {
 }
 
 .logo-image {
-    width: 30px; /* زيادة حجم الشعار */
-    height: 30px;
+    width:50px; /* زيادة حجم الشعار */
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #4cc9f0;
@@ -469,9 +469,9 @@ footer {
     }
     
     .header-top .icon {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
+        width: 40px;
+        height: 40px;
+        font-size: 0.1rem;
     }
     
     .search-input {
