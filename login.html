@@ -7,61 +7,57 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="login.css">
 </head>
+
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <div class="auth-brand">
-                    <i class="fas fa-rocket"></i>
-                    <span>منصة تسريع</span>
-                </div>
-                <h1>تسجيل الدخول</h1>
-                <p>ادخل إلى حسابك في منصة التسويق الإلكتروني</p>
-            </div>
-            
-            <form id="login-form" class="auth-form">
+    <!-- الشريط الذهبي -->
+    <div class="gold-bar"></div>
+    
+    <div class="container">
+        <!-- الشعار الكبير -->
+        <div class="logo-container">
+            <img src="tasreea.png" alt="منصة تسريع الإلكترونية" class="logo-image">
+            <h1>منصة تسريع الإلكترونية</h1>
+        </div>
+        
+        <header>
+            <h1><i class="fas fa-user-circle"></i> تسجيل الدخول</h1>
+            <p>ادخل إلى حسابك لإدارة شبكة الإحالات الخاصة بك</p>
+        </header>
+        
+        <div class="tab-content active">
+            <!-- باقي محتوى النموذج يبقى كما هو -->
+            <form id="login-form">
                 <div class="form-group">
-                    <label for="login-email">البريد الإلكتروني *</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" id="login-email" placeholder="أدخل بريدك الإلكتروني" required>
-                    </div>
+                    <label for="login-email">البريد الإلكتروني</label>
+                    <input type="email" id="login-email" placeholder="أدخل بريدك الإلكتروني" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="login-password">كلمة المرور *</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="login-password" placeholder="أدخل كلمة المرور" required>
-                    </div>
+                    <label for="login-password">كلمة المرور</label>
+                    <input type="password" id="login-password" placeholder="أدخل كلمة المرور" required>
                 </div>
                 
-                <div class="form-options">
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="remember-me">
-                        <span class="checkmark"></span>
-                        تذكرني
-                    </label>
-                    <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
-                </div>
-                
-                <button type="submit" class="auth-btn">
-                    <i class="fas fa-sign-in-alt"></i>
-                    تسجيل الدخول
-                </button>
+                <button type="submit">تسجيل الدخول</button>
             </form>
             
             <div class="alert" id="login-alert"></div>
             
-            <div class="auth-footer">
-                <p>ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a></p>
-                <p><a href="index.html">العودة إلى الصفحة الرئيسية</a></p>
-            </div>
+            <p style="margin-top: 20px; text-align: center;">
+                ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a>
+            </p>
+            
+            <p style="text-align: center;">
+                <a href="index.html">العودة إلى الصفحة الرئيسية</a>
+            </p>
         </div>
     </div>
 
+    <!-- Firebase SDK -->
     <script type="module" src="firebase.js"></script>
     <script type="module" src="auth.js"></script>
     <script type="module" src="login.js"></script>
-</body>
-  </html>
+        </body>
+
+    
+    
+    
