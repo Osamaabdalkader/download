@@ -16,7 +16,7 @@ body {
 }
 
 .container {
-    padding: 180px 15px 70px; /* تقليل المسافة بعد آخر منشور */
+    padding: 180px 15px 10px; /* تقليل المسافة بعد آخر منشور */
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -42,40 +42,48 @@ header {
     right: 0;
 }
 
-
-.header-top-icons {
+.header-top {
     display: flex;
-    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px; /* زيادة التباعد */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 85px; /* زيادة ارتفاع الصف الأول */
 }
 
-.header-top-icons .icon {
+.header-top .icon {
     position: relative;
-    width: 36px;
-    height: 36px;
+    width: 35px;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     color: #90e0ef;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     transition: all 0.3s ease;
     border: 1px solid rgba(76, 201, 240, 0.3);
+    flex-shrink: 0;
 }
 
-.header-top-icons .icon:hover {
+.header-top .icon:hover {
     background: rgba(76, 201, 240, 0.2);
     transform: translateY(-2px);
 }
-}
+
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%);
+    white-space: nowrap; /* منع العنوان من الالتفاف إلى سطرين */
 }
 
 .logo-image {
-    width: 40px;
+    width: 40px; /* زيادة حجم الشعار */
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
@@ -84,7 +92,7 @@ header {
 }
 
 .logo-container h1 {
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* زيادة حجم النص */
     font-weight: 700;
     background: linear-gradient(to right, #4cc9f0, #90e0ef);
     -webkit-background-clip: text;
@@ -94,7 +102,7 @@ header {
 
 .header-top-icons {
     display: flex;
-    gap: 5px;
+    gap: 15px;
 }
 
 .notification-badge {
@@ -173,7 +181,7 @@ header {
 }
 
 .filter-select {
-    padding: 8px 10px;
+    padding: 10px 15px;
     border-radius: 15px;
     border: 1px solid rgba(76, 201, 240, 0.3);
     background: rgba(0, 0, 0, 0.3);
@@ -453,23 +461,17 @@ footer {
 
 @media (max-width: 768px) {
     .container {
-        padding: 170px 10px 10px;
+        padding: 160px 10px 70px;
     }
     
     .logo-container h1 {
         font-size: 1rem;
     }
-
-    .logo-image {
-        width: 40px;
-        height: 40px;
-    } 
-
     
     .header-top .icon {
         width: 32px;
         height: 32px;
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
     
     .search-input {
@@ -482,7 +484,7 @@ footer {
     }
     
     .filters-row {
-        justify-content: flex-start;
+        justify-content: flex-end;
         flex-wrap: nowrap;
     }
     
@@ -529,12 +531,13 @@ footer {
     }
     
     .header-top {
-        padding: 10px;
+        padding: 15px 12px;
+        min-height: 55px;
     }
     
     .logo-image {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
     }
     
     .logo-container h1 {
@@ -542,7 +545,7 @@ footer {
     }
     
     .header-bottom {
-        padding: 5px 6px;
+        padding: 6px 15px;
     }
     
     .filters-row {
@@ -585,8 +588,8 @@ footer {
     
     /* تعديلات إضافية للهيدر على الشاشات الصغيرة */
     .header-top .icon {
-        width: 36px;
-        height: 36px;
+        width: 32px;
+        height: 32px;
         font-size: 1rem;
     }
     
@@ -597,4 +600,4 @@ footer {
     .logo-container {
         gap: 8px;
     }
-    }
+}
