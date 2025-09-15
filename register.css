@@ -1,6 +1,4 @@
-/* register.css - تصميم صفحة إنشاء حساب المتناسق مع reports ومحسّن */
-
-/* أنماط عامة */
+/* register.css - تصميم فاخر ومتطور */
 * {
     margin: 0;
     padding: 0;
@@ -9,273 +7,413 @@
 }
 
 body {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
     color: #fff;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    overflow-x: hidden;
     position: relative;
-    overflow: hidden;
 }
 
-/* شريط ذهبي في الأعلى */
 .gold-bar {
+    height: 6px;
+    background: linear-gradient(90deg, #d4af37, #f9d71c, #d4af37);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #d4af37, #f9d71c, #d4af37);
-    z-index: 1000;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
 }
 
-.container {
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(76, 201, 240, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 40%);
+    z-index: -1;
+    animation: pulse 15s ease-in-out infinite;
 }
 
-/* شعار كبير في الوسط مع حركة */
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
 .logo-container {
     text-align: center;
-    margin-bottom: 30px;
+    padding: 30px 0 20px;
     animation: float 6s ease-in-out infinite;
 }
 
-.logo-image {
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.logo {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #4cc9f0;
-    box-shadow: 0 0 30px rgba(76, 201, 240, 0.7);
-    margin-bottom: 15px;
+    box-shadow: 
+        0 0 30px rgba(76, 201, 240, 0.7),
+        0 0 60px rgba(76, 201, 240, 0.4),
+        inset 0 0 20px rgba(212, 175, 55, 0.3);
+    padding: 5px;
+    background: rgba(15, 32, 39, 0.8);
 }
 
 .logo-container h1 {
     font-size: 2.2rem;
     font-weight: 700;
-    background: linear-gradient(to right, #4cc9f0, #90e0ef, #d4af37);
+    background: linear-gradient(to right, #d4af37, #f9d71c, #4cc9f0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    margin-bottom: 10px;
+    margin-top: 15px;
+    letter-spacing: 1px;
 }
 
-/* تصميم الهيدر */
-header {
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: calc(100vh - 200px);
+}
+
+.form-container {
+    background: rgba(15, 32, 39, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid rgba(76, 201, 240, 0.3);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(76, 201, 240, 0.2),
+        inset 0 0 15px rgba(212, 175, 55, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    transform: rotate(45deg);
+    animation: shine 6s infinite;
+    z-index: 0;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.form-header {
     text-align: center;
     margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
 }
 
-header h1 {
+.form-header h2 {
     font-size: 1.8rem;
-    font-weight: 700;
-    background: linear-gradient(to right, #4cc9f0, #90e0ef);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     margin-bottom: 10px;
+    color: #90e0ef;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
 
-header p {
+.form-header p {
     color: rgba(255, 255, 255, 0.7);
     font-size: 1rem;
 }
 
-/* محتوى النموذج */
-.tab-content {
-    background: rgba(15, 32, 39, 0.8);
-    border-radius: 20px;
-    padding: 35px;
-    border: 2px solid rgba(76, 201, 240, 0.3);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+.input-group {
     position: relative;
-    overflow: hidden;
-}
-
-.tab-content::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, transparent, rgba(76, 201, 240, 0.1), transparent);
-    z-index: -1;
-    animation: borderAnimation 3s linear infinite;
-}
-
-.form-group {
     margin-bottom: 25px;
-    position: relative;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 10px;
-    color: #90e0ef;
-    font-weight: 500;
+.input-group .icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: #4cc9f0;
     font-size: 1.1rem;
 }
 
-.form-group input {
+.input-group .toggle-password {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.input-group .toggle-password:hover {
+    color: #4cc9f0;
+}
+
+.input-group input {
     width: 100%;
-    padding: 15px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(76, 201, 240, 0.3);
+    padding: 15px 50px 15px 45px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(76, 201, 240, 0.3);
     border-radius: 12px;
     color: white;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
 
-.form-group input:focus {
+.input-group input:focus {
     outline: none;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.12);
     border-color: #4cc9f0;
-    box-shadow: 0 0 15px rgba(76, 201, 240, 0.4);
-    transform: translateY(-2px);
+    box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.2);
 }
 
-.form-group input::placeholder {
+.input-group input::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
 
-button[type="submit"] {
+.terms-container {
+    margin: 25px 0;
+    font-size: 0.9rem;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    height: 18px;
+    width: 18px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(76, 201, 240, 0.3);
+    border-radius: 4px;
+    margin-left: 8px;
+    position: relative;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background: #4cc9f0;
+    border-color: #4cc9f0;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container a {
+    color: #4cc9f0;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.checkbox-container a:hover {
+    color: #90e0ef;
+    text-decoration: underline;
+}
+
+.submit-btn {
     width: 100%;
-    padding: 16px;
-    background: linear-gradient(90deg, #4cc9f0, #3a86ff, #d4af37);
-    background-size: 200% 100%;
+    padding: 15px;
+    background: linear-gradient(90deg, #4cc9f0, #3a86ff);
     color: white;
     border: none;
     border-radius: 12px;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.5s ease;
-    margin-top: 15px;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 
-button[type="submit"]::before {
+.submit-btn::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: 0.5s;
+    background: linear-gradient(90deg, #3a86ff, #4cc9f0);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
 }
 
-button[type="submit"]:hover {
-    background-position: 100% 0;
+.submit-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(58, 134, 255, 0.5);
+    box-shadow: 0 10px 20px rgba(58, 134, 255, 0.4);
 }
 
-button[type="submit"]:hover::before {
-    left: 100%;
+.submit-btn:hover::before {
+    opacity: 1;
 }
 
-/* التنبيهات */
+.submit-btn:active {
+    transform: translateY(0);
+}
+
 .alert {
-    padding: 15px 20px;
-    border-radius: 12px;
-    margin-top: 25px;
-    font-size: 1rem;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-size: 0.9rem;
     display: none;
-    text-align: center;
-    backdrop-filter: blur(5px);
 }
 
 .alert.success {
     background: rgba(46, 204, 113, 0.2);
-    border: 2px solid rgba(46, 204, 113, 0.3);
+    border: 1px solid rgba(46, 204, 113, 0.3);
     color: #2ecc71;
 }
 
 .alert.error {
     background: rgba(231, 76, 60, 0.2);
-    border: 2px solid rgba(231, 76, 60, 0.3);
+    border: 1px solid rgba(231, 76, 60, 0.3);
     color: #e74c3c;
 }
 
 .alert.info {
     background: rgba(52, 152, 219, 0.2);
-    border: 2px solid rgba(52, 152, 219, 0.3);
+    border: 1px solid rgba(52, 152, 219, 0.3);
     color: #3498db;
 }
 
-/* الروابط */
-p {
+.alternative-options {
+    margin: 25px 0;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(76, 201, 240, 0.3);
+}
+
+.divider span {
+    padding: 0 15px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}
+
+.social-login {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid rgba(76, 201, 240, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+}
+
+.social-btn.google:hover {
+    background: rgba(219, 68, 55, 0.2);
+    border-color: #db4437;
+}
+
+.social-btn.facebook:hover {
+    background: rgba(59, 89, 152, 0.2);
+    border-color: #3b5998;
+}
+
+.form-footer {
     text-align: center;
     margin-top: 25px;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
 }
 
-p a {
+.form-footer p {
+    margin: 10px 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.form-footer a {
     color: #4cc9f0;
     text-decoration: none;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    position: relative;
+    transition: all 0.3s;
 }
 
-p a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #4cc9f0, #90e0ef);
-    transition: width 0.3s ease;
-}
-
-p a:hover {
+.form-footer a:hover {
     color: #90e0ef;
-}
-
-p a:hover::after {
-    width: 100%;
-}
-
-/* أنيميشن */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
-@keyframes borderAnimation {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 200% 0%; }
+    text-decoration: underline;
 }
 
 /* تصميم متجاوب */
 @media (max-width: 576px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .tab-content {
-        padding: 25px 20px;
-    }
-    
-    .logo-image {
+    .logo {
         width: 100px;
         height: 100px;
     }
@@ -284,19 +422,11 @@ p a:hover::after {
         font-size: 1.8rem;
     }
     
-    header h1 {
-        font-size: 1.5rem;
+    .form-container {
+        padding: 25px 20px;
     }
     
-    header p {
-        font-size: 0.9rem;
+    .social-login {
+        flex-direction: column;
     }
-    
-    .form-group input {
-        padding: 12px 15px;
-    }
-    
-    button[type="submit"] {
-        padding: 14px;
-    }
-    }
+}
