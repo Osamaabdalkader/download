@@ -537,13 +537,13 @@ footer {
     }
     
     .header-top {
-        padding: 12px 10px;
-        min-height: 65px;
+        padding: 6px 10px;
+        min-height: 55px;
     }
     
     .logo-image {
-        width: 32px;
-        height: 32px;
+        width: 42px;
+        height: 42px;
     }
     
     .logo-container h1 {
@@ -551,7 +551,7 @@ footer {
     }
     
     .header-bottom {
-        padding: 10px 12px;
+        padding: 5px 6px;
     }
     
     .filters-row {
