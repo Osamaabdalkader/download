@@ -83,8 +83,8 @@ header {
 }
 
 .logo-image {
-    width: 50px; /* زيادة حجم الشعار */
-    height: 50px;
+    width: 40px; /* زيادة حجم الشعار */
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #4cc9f0;
@@ -92,7 +92,7 @@ header {
 }
 
 .logo-container h1 {
-    font-size: 1.4rem; /* زيادة حجم النص */
+    font-size: 1.2rem; /* زيادة حجم النص */
     font-weight: 700;
     background: linear-gradient(to right, #4cc9f0, #90e0ef);
     -webkit-background-clip: text;
@@ -102,7 +102,7 @@ header {
 
 .header-top-icons {
     display: flex;
-    gap: 15px;
+    gap: 5px;
 }
 
 .notification-badge {
