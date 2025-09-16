@@ -49,7 +49,7 @@ function setupEventListeners() {
         profileHeaderIcon.addEventListener('click', () => {
             const user = auth.currentUser;
             if (user) {
-                window.location.href = 'profile.html';
+                window.location.href = 'dashboard.html';
             } else {
                 window.location.href = 'login.html';
             }
